@@ -292,7 +292,20 @@
             </div>
         </div>
     </div>
-  
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        $(function(){
+            /* example in class
+            $(".icon").css({  //selecting a set of 0 or more icons on the page
+                color: "red"
+            });
+            */
+            $(".tabs li").click(function(){ //if .tabs li is clicked
+                $(".tabs li").removeClass("is-active"); //remove "is-active" from all the .tabs li
+                $(this).addClass("is-active"); //"this" is the element that triggered the function
+            });
+        })
+    </script>
     <script>
         document.getElementById("dropdownButton").addEventListener("click", function(){
             document.getElementById("dropdown").classList.toggle("is-active");
