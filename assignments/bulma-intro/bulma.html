@@ -14,7 +14,7 @@
             <a class="navbar-item" href="https://bulma.io">
             <img src="https://bulma.io/images/bulma-logo-white.png" width="112" height="28">
             </a>
-            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+            <a role="button" class="navbar-burger">
             <span></span>
             <span></span>
             <span></span>
@@ -109,62 +109,30 @@
                     <div class="panel">
                         <div class="tabs is-boxed">
                             <ul>
-                                <li class="is-active">
+                                <li v-for="tab in tabs" :class="{'is-active': currentTab == tab.name}" @click="currentTab = tab.name">
                                     <a>
-                                        <span class="icon is-small"><i class="fas fa-clipboard-list"></i></span>
-                                        <span>Current</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-calendar-times"></i></span>
-                                        <span>Completed</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-calendar-day"></i></span>
-                                        <span>Upcoming</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a>
-                                        <span class="icon is-small"><i class="fas fa-calendar"></i></span>
-                                        <span>All</span>
+                                        <span class="icon is-small"><i :class = "tab.icon"></i></span>
+                                        <span>{{tab.name}}</span>
+                                        <span class="tag icon is-danger" v-show="tab.name == 'Current'">{{items.filter(item => !item.completed).length}}</span>
+                                        <span class="tag icon is-success"v-show="tab.name == 'Completed'">{{items.filter(item => item.completed).length}}</span>
                                     </a>
                                 </li>
                             </ul>
                         </div>
                         <div class="panel-block">
                             <div class="control has-icons-left">
-                                <input type="text" class="input is-block" placeholder="New Task">
+                                <input type="text" class="input is-block" placeholder="New Task" v-model="newTask" @keypress.enter="addTask">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-calendar-plus"></i>
                                 </span>
                             </div>
                         </div>
-                        <a class="panel-block">
-                            <input type="checkbox" checked/>
-                            Make Bulma great again
-                        </a>
-                        <a class="panel-block">
-                            <input type="checkbox"/>
-                            Add some more features
-                        </a>
-                        <a class="panel-block">
-                            <input type="checkbox"/>
-                            Make a Github account
-                        </a>
-                        <a class="panel-block">
-                            <input type="checkbox"/>
-                            Learn how to use Github
-                        </a>
-                        <a class="panel-block">
-                            <input type="checkbox"/>
-                            Add a .gitignore file
+                        <a v-for="item in items" class="panel-block" v-show="isValidAddItem(item)">
+                            <input type="checkbox" v-model="item.completed"/>
+                            {{ item.name }}
                         </a>
                     </a>
-                    </div>
+                    </div> 
                     <article class="message is-primary">
                         <div class="message-header">
                             <p>Make a github account</p>
@@ -292,26 +260,43 @@
             </div>
         </div>
     </div>
-   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script>
-        $(function(){
-            /* example in class
-            $(".icon").css({  //selecting a set of 0 or more icons on the page
-                color: "red"
-            });
-            */
-            $(".tabs li").click(function(){ //if .tabs li is clicked
-                $(".tabs li").removeClass("is-active"); //remove "is-active" from all the .tabs li
-                $(this).addClass("is-active"); //"this" is the element that triggered the function
-            });
-        })
-    </script>
-    <script>
-        document.getElementById("dropdownButton").addEventListener("click", function(){
-            document.getElementById("dropdown").classList.toggle("is-active");
-        });
-    </script>
-</body>
+        Vue.createApp({
+            data(){
+                return{
+                    currentTab: "All",
+                    newTask: '',
+                    tabs: [
+                        { name: 'Current', icon: 'fas fa-spinner' },
+                        { name: 'Completed', icon: 'fas fa-check' },
+                        { name: 'All', icon: 'fas fa-list' },
+                        { name: 'Overdue', icon: 'fas fa-exclamation-triangle' }
+                    ],
+                    items: [
+                        { name: 'Finish creating todo list', completed: false}
+                    ]
+                }
+            },
+            methods: {
+                isValidAddItem(item){ //Called whenever we have to decide which items to show on the screen (switching tabs)
+                    if(this.currentTab == 'Current' && !item.completed) return true;
+                    if(this.currentTab == 'Completed' && item.completed) return true;
+                    if(this.currentTab == 'All') return true;
+                    return false;
+                },
+                addTask(){ //Called whenever someone presses enter on the add task form
+                    this.items.push({name: this.newTask, completed: false});
+                    this.newTask= '';
+                }
+            }
+        }).mount('body');
+    </script>      
+    </body>
 </html>
+
+
+
+
 
 
