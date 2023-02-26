@@ -1,2 +1,2 @@
 # final-web-dev
-The final project for a web dev class taken at University
+The final project and assignments for a web dev class taken at University
