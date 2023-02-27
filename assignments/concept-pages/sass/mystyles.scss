@@ -1,3 +1,5 @@
+/*sass --no-source-map sass/mystyles.scss:css/mystyles.css*/
+
 @charset "utf-8";
 
 // Import a Google Font
@@ -12,11 +14,11 @@ $blue: #A9E5BB;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
-$primary: $red;
-$link: $darkness;
-$info: $orange;
-$success: $light;
-$warning: $blue;
+$primary: $darkness;
+$link: $blue;
+$info: $light;
+$success: $orange;
+$warning: $red;
 //$danger: $red
 //$dark: $grey-darker
 //$text: $grey-dark
