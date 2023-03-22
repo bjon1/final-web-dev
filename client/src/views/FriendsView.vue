@@ -49,7 +49,7 @@
         <h1 class="title">Your Friend's Workouts</h1>
 
         <div class="button is-link" id="add-workout" @click = "toggleModal">
-            +
+            <i class="fa-solid fa-plus fa-2x"></i>
         </div>
 
         <div class="modal" :class="{ 'is-active': isModalActive }">
@@ -145,8 +145,14 @@
 <style scoped>
     #add-workout {
         position: fixed;
-        bottom: 30px;
-        right: 30px;
+        height: 100px;
+        width: 100px;
+        bottom: 60px;
+        right: 60px;
         border-radius: 50%;
+    }
+
+    #add-workout:hover {
+        transform: scale(1.05);
     }
 </style>

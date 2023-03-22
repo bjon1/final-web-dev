@@ -3,6 +3,7 @@
   import { useSession, setLogin } from '@/model/session';
   import database from '../../data/exercises.json'
   import userDatabase from '../../data/database.json'
+  import SideBar from '../components/SideBar.vue';
   const session = useSession();
 
   let isModalActive = ref(false);
@@ -44,10 +45,10 @@
 
 <template>
     <div class="section mx-5">
-        <h1 class="title">Your Activity</h1>
-
+        <h1 class="title">Your Exercise Activity</h1>
+        
         <div class="button is-link" id="add-workout" @click = "toggleModal">
-            +
+            <i class="fa-solid fa-plus fa-2x"></i>
         </div>
 
         <div class="modal" :class="{ 'is-active': isModalActive }">
@@ -91,50 +92,57 @@
             </div>
             <button class="modal-close is-large" @click = "toggleModal" aria-label="close"></button>
         </div>
-        
-        <div v-for="(exercise, index) in database.exercises.filter((elem) => elem.name == session.user.name)" :key="index" class="box">
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-64x64">
-                        <img :src="userImg(exercise.name)">
-                    </p>    
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <strong>{{ exercise.name }}</strong> <small>@johnsmith</small> <small>31m</small>
-                        <br>
-                        {{ exercise.description }}
-                        <br>
-                        <div class="column is-flex is-centered is-justify-content-space-around" >
-                            <div>
-                                <div class="title" style="margin: 0px">{{ exercise.distance }}m</div>
-                                <div class="heading ">Distance</div>
-                            </div>
-                            <div>
-                                <div class="title" style="margin: 0px">{{ exercise.duration }}s</div>
-                                <div class="heading">Duration</div>
-                            </div>
-                            <div>
-                                <div class="title" style="margin: 0px">{{ exercise.pace }}mph</div>
-                                <div class="heading">Pace</div>
+
+        <div class="columns is-variable is-8">
+            <div class="column is-one-quarter">
+                <SideBar />
+            </div>
+            <div class="column">
+                <div v-for="(exercise, index) in database.exercises.filter((elem) => elem.name == session.user.name)" :key="index" class="box">
+                    <article class="media">
+                        <figure class="media-left">
+                            <p class="image is-64x64">
+                                <img :src="userImg(exercise.name)">
+                            </p>    
+                        </figure>
+                        <div class="media-content">
+                            <div class="content">
+                                <strong>{{ exercise.name }}</strong> <small>@johnsmith</small> <small>31m</small>
+                                <br>
+                                {{ exercise.description }}
+                                <br>
+                                <div class="column is-flex is-centered is-justify-content-space-around" >
+                                    <div>
+                                        <div class="title" style="margin: 0px">{{ exercise.distance }}m</div>
+                                        <div class="heading ">Distance</div>
+                                    </div>
+                                    <div>
+                                        <div class="title" style="margin: 0px">{{ exercise.duration }}s</div>
+                                        <div class="heading">Duration</div>
+                                    </div>
+                                    <div>
+                                        <div class="title" style="margin: 0px">{{ exercise.pace }}mph</div>
+                                        <div class="heading">Pace</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <nav class="level is-mobile">
+                            <div class="level-left">
+                                <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                </a>
+                                <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                </a>
+                                <a class="level-item">
+                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                </a>
+                            </div>
+                        </nav>
+                    </article>
                 </div>
-                <nav class="level is-mobile">
-                    <div class="level-left">
-                        <a class="level-item">
-                        <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                        </a>
-                        <a class="level-item">
-                        <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                        </a>
-                        <a class="level-item">
-                        <span class="icon is-small"><i class="fas fa-heart"></i></span>
-                        </a>
-                    </div>
-                </nav>
-            </article>
+            </div>
         </div>
     </div>
     
@@ -143,8 +151,14 @@
 <style scoped>
     #add-workout {
         position: fixed;
-        bottom: 30px;
-        right: 30px;
+        height: 100px;
+        width: 100px;
+        bottom: 60px;
+        right: 60px;
         border-radius: 50%;
+    }
+
+    #add-workout:hover {
+        transform: scale(1.05);
     }
 </style>

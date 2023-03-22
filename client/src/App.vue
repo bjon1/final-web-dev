@@ -2,6 +2,7 @@
   import { RouterView } from 'vue-router'
   import NavBar from './components/NavBar.vue';
 
+
   
   fetch('https://dummyjson.com/products/search?q=phone')
   .then(res => res.json())

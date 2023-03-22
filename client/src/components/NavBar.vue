@@ -45,6 +45,8 @@
 </script>
 
 <template>
+
+
 <nav class="navbar is-spaced is-link" v-if="isLoggedIn == false"> <!--#2D1E2F--> <!--'is-spaced': session.user == null-->
     <div class="navbar-brand">
         <a class="navbar-item logo" href="/">
@@ -81,11 +83,11 @@
 </nav>
 
 
-<nav class="navbar is-spaced nav-border" v-else> <!--#2D1E2F--> <!--'is-spaced': session.user == null-->
+<nav class="navbar is-spaced nav-border " v-else> <!--#2D1E2F--> <!--'is-spaced': session.user == null-->
     <div class="navbar-brand">
         <a class="navbar-item logo" href="/">
             <img src='../assets/eLogger-logo-black.png' style="margin-right: 0.3em;">
-            <div class="subtitle is-5">ELOGGER</div>
+            <div class="subtitle is-5"></div>
         </a>
         <a class="navbar-burger" data-target="navMenu" :class="{'is-active': isMenuActive}" @click="toggleMenu">
             <span></span>
@@ -188,7 +190,7 @@
 
 .nav-border {
     border-bottom: 1px solid #d7d6d6;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 2px -2px rgba(0, 0, 0, 0.1);
 }
 
 .profile {
