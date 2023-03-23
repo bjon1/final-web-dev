@@ -10,8 +10,8 @@
 </script>
 
 <template>
-    <NavBar />
-    <RouterView />
+  <NavBar />
+  <RouterView />
 </template>
 
 <style scoped>

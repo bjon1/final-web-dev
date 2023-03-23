@@ -82,47 +82,75 @@
     </div>
 </nav>
 
-
-<nav class="navbar is-spaced nav-border " v-else> <!--#2D1E2F--> <!--'is-spaced': session.user == null-->
-    <div class="navbar-brand">
-        <a class="navbar-item logo" href="/">
-            <img src='../assets/eLogger-logo-black.png' style="margin-right: 0.3em;">
-            <div class="subtitle is-5"></div>
+<nav class="sidebar" v-else>
+    <div class="m-4">
+        <a class="navbar-item" to="/stats" style="height: 90px;" >
+            <img src='../assets/eLogger-logo-black.png' class="logo-sidebar">
+            <div class="logo-sidebar subtitle is-6" style="margin-left: 53px;">eLogger</div>
         </a>
-        <a class="navbar-burger" data-target="navMenu" :class="{'is-active': isMenuActive}" @click="toggleMenu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </a>
-    </div>
-    <div class="navbar-menu menu" :class="{'is-active': isMenuActive}" id="navMenu">    
-        <div class="navbar-start">
-        </div>
-        
-        <div class="navbar-end">
-            <div class="navbar-item has-dropdown is-hoverable">
-                <a class ="navbar-link">
-                    <RouterLink to="/stats" class="navbar-item">My Statistics</RouterLink>
-                </a>
-                <div class="navbar-dropdown">
-                    <RouterLink to="/exercise" class="navbar-item">Exercise</RouterLink>
-                    <RouterLink to="/list" class="navbar-item">Habits</RouterLink>
-                </div>
-            </div>
-            <RouterLink to="/friends" class="navbar-item">Friends</RouterLink>
-            <RouterLink to="/products" class="navbar-item">Products</RouterLink>
-            <RouterLink v-show="session.user.id == 5" to="/admin" class="navbar-item">Admin</RouterLink>    
-            <div class="navbar-item" v-if="session.user != null">
-                <div class="navbar-item"><img :src="session.user.photo" class="image is-32x32 profile" alt="profile picture"/></div>
+        <RouterLink to="/stats" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa fa-line-chart"></i>
+                </span>
+                <span>Statistics</span>
+            </span>
+        </RouterLink>
+        <RouterLink to="/exercise" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-wave-pulse"></i>
+                </span>
+                <span>Exercise</span>
+            </span>
+        </RouterLink>
+        <RouterLink to="/list" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-wave-pulse"></i>
+                </span>
+                <span>Habits</span>
+            </span>
+        </RouterLink>
+        <RouterLink to="/friends" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-wave-pulse"></i>
+                </span>
+                <span>Friends</span>
+            </span>
+        </RouterLink>
+        <RouterLink to="/products" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-wave-pulse"></i>
+                </span>
+                <span>Products</span>
+            </span>
+        </RouterLink>
+        <RouterLink v-show="session.user.id == 5" to="/admin" class="navbar-item">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-wave-pulse"></i>
+                </span>
+                <span>Admin</span>
+            </span>
+        </RouterLink>
+        <div class="navbar-item" v-if="session.user != null">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <img :src="session.user.photo" class="image is-16x16 profile" alt="profile picture"/>
+                </span>
                 <span>{{ session.user.name }}</span>
-            </div>
-            <div class="buttons navbar-item">
-                <a class="button is-danger is-rounded" @click = "logIn(false)">
-                <strong>Sign out</strong>
-                </a>
-            </div>
+            </span>
+        </div>
+        <div class="buttons navbar-item">
+            <a class="button is-danger" @click = "logIn(false)">
+            <strong>Sign out</strong>
+            </a>
         </div>
     </div>
+    
 </nav>
 
 
@@ -178,10 +206,17 @@
     padding-bottom: 0.5em;
 }
 
+
+
 .logo {
     transform: scale(1.7);
     margin-left: 4em;
     margin-top: 0.5em;
+}
+
+.logo-sidebar {
+    transform: scale(2.0);  
+    margin-left: 0.6em;
 }
 
 .menu {
@@ -198,7 +233,13 @@
     border-radius: 30px;
 }
 
+.sidebar {
+    background-color: white;
+    border-right: 1px solid #d7d6d6;
+    height: 100vh;
+    width: 250px;
+    position: fixed;
+    z-index: 999;
+}
+
 </style>
-
-
-

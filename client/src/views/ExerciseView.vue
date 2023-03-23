@@ -3,7 +3,6 @@
   import { useSession, setLogin } from '@/model/session';
   import database from '../../data/exercises.json'
   import userDatabase from '../../data/database.json'
-  import SideBar from '../components/SideBar.vue';
   const session = useSession();
 
   let isModalActive = ref(false);
@@ -44,9 +43,7 @@
 </script>
 
 <template>
-    <div class="section mx-5">
-        <h1 class="title">Your Exercise Activity</h1>
-        
+    <div class="section mx-5">        
         <div class="button is-link" id="add-workout" @click = "toggleModal">
             <i class="fa-solid fa-plus fa-2x"></i>
         </div>
@@ -94,10 +91,11 @@
         </div>
 
         <div class="columns is-variable is-8">
-            <div class="column is-one-quarter">
-                <SideBar />
+            <div class="column is-one-fifth">
+                <!--Sidebar-->
             </div>
             <div class="column">
+                <h1 class="title">Your Exercise Activity</h1>
                 <div v-for="(exercise, index) in database.exercises.filter((elem) => elem.name == session.user.name)" :key="index" class="box">
                     <article class="media">
                         <figure class="media-left">
