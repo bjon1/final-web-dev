@@ -1,12 +1,16 @@
 <script setup lang="ts">
     import { ref } from 'vue';
-    import { getProducts } from '../model/products'
-    const products = ref(getProducts());
+    import { getProducts, type Product } from '../model/products'
+    
+    const products = ref<Product[]>([]);
+    getProducts().then((data) => {
+        products.value = data.data;
+    })
 
     let isModalActive = ref(false);
     let productModal = {};
 
-    function toggleModal(title, price, description, thumbnail) {
+    function toggleModal(title: any, price: any, description: any, thumbnail: any) {
         productModal = {
             thumbnail: thumbnail,
             title: title,

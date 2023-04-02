@@ -1,4 +1,5 @@
-import data from "../../data/products.json";
+import { fetchData } from "./fetcher";
+import type { DataListEnvelope } from "./fetcher";
 
 export interface Product {
     id: number;
@@ -14,6 +15,6 @@ export interface Product {
     images: string[];
 }
 
-export function getProducts(): Product[] {
-    return data.products;
+export function getProducts(): Promise<DataListEnvelope<Product>> { //A promise object that will resolve in the form of DataListEnvelope, where T = Product[]
+    return fetchData('products'); 
 }

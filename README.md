@@ -2,7 +2,8 @@
 The final project and assignments for a web dev class taken at University
 
 
-eLogger website passwords:
+Test Username & Password info: 
+
 email: jonb1@newpaltz.edu
 password: pass1
 

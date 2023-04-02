@@ -5,6 +5,7 @@
     import { useSession, setLogin } from '@/model/session';
     import router from '@/router';
 
+
     const session = useSession();
     let isMenuActive = ref(false);
     let isModalActive = ref(false);
@@ -30,7 +31,7 @@
         return isLoggedIn;
     }
 
-    function checkLogin() {
+    function checkLogin(this: any) {
         let email = this.email.value;
         let password = this.password.value;
 
@@ -84,11 +85,11 @@
 
 <nav class="sidebar" v-else>
     <div class="m-4">
-        <a class="navbar-item" to="/stats" style="height: 90px;" >
+        <a class="navbar-item" to="/stats" style="height: 120px;" >
             <img src='../assets/eLogger-logo-black.png' class="logo-sidebar">
             <div class="logo-sidebar subtitle is-6" style="margin-left: 53px;">eLogger</div>
         </a>
-        <RouterLink to="/stats" class="navbar-item">
+        <RouterLink to="/stats" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa fa-line-chart"></i>
@@ -96,7 +97,7 @@
                 <span>Statistics</span>
             </span>
         </RouterLink>
-        <RouterLink to="/exercise" class="navbar-item">
+        <RouterLink to="/exercise" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
@@ -104,7 +105,7 @@
                 <span>Exercise</span>
             </span>
         </RouterLink>
-        <RouterLink to="/list" class="navbar-item">
+        <RouterLink to="/list" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
@@ -112,7 +113,7 @@
                 <span>Habits</span>
             </span>
         </RouterLink>
-        <RouterLink to="/friends" class="navbar-item">
+        <RouterLink to="/friends" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
@@ -120,7 +121,7 @@
                 <span>Friends</span>
             </span>
         </RouterLink>
-        <RouterLink to="/products" class="navbar-item">
+        <RouterLink to="/products" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
@@ -128,7 +129,7 @@
                 <span>Products</span>
             </span>
         </RouterLink>
-        <RouterLink v-show="session.user.id == 5" to="/admin" class="navbar-item">
+        <RouterLink v-show="session.user.id == 5" to="/admin" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
