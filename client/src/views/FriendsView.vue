@@ -15,22 +15,27 @@
         isModalActive.value = !isModalActive.value;
     }
 
-    function addWorkout() {
-        let distance = this.distance.value;
-        let duration = this.duration.value;
-        let pace = this.pace.value;
-        let description = this.description.value;
+    function addWorkout( //make this function exportable
+        this: {
+        distance: HTMLInputElement,
+        duration: HTMLInputElement,
+        pace: HTMLInputElement,
+        description: HTMLInputElement,
+        }
+    ) {
+        let distanceVal: string = this.distance.value;
+        let durationVal: string = this.duration.value;
+        let paceVal: string = this.pace.value;
+        let descriptionVal: string = this.description.value;
 
         let workout = {
-            "name": session.user.name,
-            "distance": distance,
-            "duration": duration,
-            "pace": pace,
-            "description": description
+            "name": session.user?.name as string,
+            "distance": distanceVal as unknown as number,
+            "duration": durationVal as string,
+            "pace": paceVal as unknown as number,
+            "description": descriptionVal as string
         }
         database.exercises.unshift(workout);
-        console.log("ADD WORKOUT");
-        console.log(database);
         toggleModal();
     }
 

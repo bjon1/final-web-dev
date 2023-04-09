@@ -90,10 +90,14 @@ let loggedInPages = ['stats', 'exercise', 'list', 'friends', 'products', 'admin'
 
 router.beforeEach((to, from) => {
   const session = useSession();
-  //if you're: 1) not logged in and want to go to a "logged in page" or 2) logged in and want to go to a "not logged in page" or 3) logged in as a non-admin and want to go to an admin page
-  if(!session.user && loggedInPages.includes(String(to.name)) || session.user && !loggedInPages.includes(String(to.name)) ) {
-    return false;
-  } 
+  //if you're not logged in and want to go to a "logged in page" get sent home
+  if(!session.user && loggedInPages.includes(String(to.name))) {
+    router.push('/');
+  //if you're logged in and want to go to a 'not logged in page,' log user out
+  } else if(session.user && !loggedInPages.includes(String(to.name)) ) { 
+    session.user = null;
+    router.push('/');
+  }
 })
 
 export default router

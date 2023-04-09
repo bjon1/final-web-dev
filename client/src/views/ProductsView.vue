@@ -8,9 +8,15 @@
     })
 
     let isModalActive = ref(false);
-    let productModal = {};
+    let productModal = {
+        thumbnail: '',
+        title: '',
+        description: '',
+        price: 0
 
-    function toggleModal(title: any, price: any, description: any, thumbnail: any) {
+    };
+
+    function toggleModal(title: string, price: number, description: string, thumbnail: string) {
         productModal = {
             thumbnail: thumbnail,
             title: title,
@@ -42,7 +48,7 @@
                             <div class="modal-background"></div>
                             <div class="modal-content">
                                 <div class="box">
-                                    <img :src="productModal.thumbnail" alt="product-image" />
+                                    <img :src="productModal?.thumbnail" alt="product-image" />
                                     <h1 class = 'title is-4 '>{{ productModal.title }}</h1>
                                     <p class = 'subtitle is-6'>{{ productModal.description }}</p>
                                     <p class = 'subtitle is-6 has-text-weight-bold'>${{ productModal.price }}.00</p>

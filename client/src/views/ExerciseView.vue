@@ -15,22 +15,30 @@
         isModalActive.value = !isModalActive.value;
     }
 
-    function addWorkout() {
-        let distance = this.distance.value;
-        let duration = this.duration.value;
-        let pace = this.pace.value;
-        let description = this.description.value;
+    function addWorkout(
+        this: {
+        distance: HTMLInputElement,
+        duration: HTMLInputElement,
+        pace: HTMLInputElement,
+        description: HTMLInputElement,
+        }
+    ) {
+        let distanceVal: string = this.distance.value;
+        let durationVal: string = this.duration.value;
+        let paceVal: string = this.pace.value;
+        let descriptionVal: string = this.description.value;
 
         let workout = {
-            "name": session.user.name,
-            "distance": distance,
-            "duration": duration,
-            "pace": pace,
-            "description": description
+            "name": session.user?.name as string,
+            "distance": distanceVal as unknown as number,
+            "duration": durationVal as string,
+            "pace": paceVal as unknown as number,
+            "description": descriptionVal as string
         }
         database.exercises.unshift(workout);
         toggleModal();
     }
+    
 
     function userImg(name: string) {
         for(let i = 0; i < userDatabase.users.length; i++){
@@ -96,7 +104,7 @@
             </div>
             <div class="column">
                 <h1 class="title">Your Exercise Activity</h1>
-                <div v-for="(exercise, index) in database.exercises.filter((elem) => elem.name == session.user.name)" :key="index" class="box">
+                <div v-for="(exercise, index) in database.exercises.filter((elem) => elem.name == session.user?.name)" :key="index" class="box">
                     <article class="media">
                         <figure class="media-left">
                             <p class="image is-64x64">

@@ -13,15 +13,14 @@
     ])
 
     function isValidAddItem(item: { completed: any; }) {
-        if(this.currentTab == 'Current' && !item.completed) return true;
-        if(this.currentTab == 'Completed' && item.completed) return true;
-        if(this.currentTab == 'All') return true;
+        if(currentTab.value == 'Current' && !item.completed) return true;
+        if(currentTab.value == 'Completed' && item.completed) return true;
+        if(currentTab.value == 'All') return true;
         return false;
     }
-
     function addTask() {
-        this.items.push({name: this.newTask, completed: false});
-        this.newTask= '';
+        items.value.push({name: newTask.value, completed: false});
+        newTask.value= '';
     }
 </script>
 

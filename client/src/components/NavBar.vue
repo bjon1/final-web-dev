@@ -31,24 +31,25 @@
         return isLoggedIn;
     }
 
-    function checkLogin(this: any) {
-        let email = this.email.value;
-        let password = this.password.value;
+    function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
+    let email = emailRef;
+    let password = passwordRef;
 
-        if(setLogin(email, password)){
-            logIn(true);
-            isModalActive.value = false;
-        } else {
-            isInvalidForm.value = true;
-        }
+    if(setLogin(email as string, password as string)){
+        logIn(true);
+        isModalActive.value = false;
+    } else {
+        isInvalidForm.value = true;
     }
+    }
+
 
 </script>
 
 <template>
 
 
-<nav class="navbar is-spaced is-link" v-if="isLoggedIn == false"> <!--#2D1E2F--> <!--'is-spaced': session.user == null-->
+<nav class="navbar is-spaced is-link" v-if="isLoggedIn == false">
     <div class="navbar-brand">
         <a class="navbar-item logo" href="/">
             <img src='../assets/eLogger-logo.png' style="margin-right: 0.3em;">
@@ -129,7 +130,7 @@
                 <span>Products</span>
             </span>
         </RouterLink>
-        <RouterLink v-show="session.user.id == 5" to="/admin" class="navbar-item mb-3">
+        <RouterLink v-show="session.user ? session.user.id == 5 : false" to="/admin" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-wave-pulse"></i>
@@ -137,7 +138,7 @@
                 <span>Admin</span>
             </span>
         </RouterLink>
-        <div class="navbar-item" v-if="session.user != null">
+        <div class="navbar-item" v-if="session.user">
             <span class="icon-text is-large">
                 <span class="icon">
                     <img :src="session.user.photo" class="image is-16x16 profile" alt="profile picture"/>
@@ -159,7 +160,7 @@
 <div class="modal" :class="{ 'is-active': isModalActive }" id="signup">
     <div class="modal-background"></div>
     <div class="modal-content">
-        <form @submit.prevent="() => checkLogin()" class="box">
+        <form @submit.prevent="() => checkLogin(email?.value as string, password?.value as string)" class="box">
             <div class="column field">
                 <label for="" class="label">Email</label>
                 <div class="control has-icons-left">
