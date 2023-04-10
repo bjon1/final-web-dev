@@ -6,36 +6,30 @@
   const session = useSession();
 
   let isModalActive = ref(false);
-  const distance: Ref<HTMLInputElement | undefined> = ref(undefined);
-  const duration: Ref<HTMLInputElement | undefined> = ref(undefined);
-  const pace: Ref<HTMLInputElement | undefined> = ref(undefined);
-  const description: Ref<HTMLInputElement | undefined> = ref(undefined);
+
+  let distance = ref('');
+  let duration = ref('');
+  let pace = ref('');
+  let description = ref('');
 
     function toggleModal() {
         isModalActive.value = !isModalActive.value;
     }
 
-    function addWorkout( //make this function exportable
-        this: {
-        distance: HTMLInputElement,
-        duration: HTMLInputElement,
-        pace: HTMLInputElement,
-        description: HTMLInputElement,
-        }
-    ) {
-        let distanceVal: string = distance.value as unknown as string;
-        let durationVal: string = duration.value as unknown as string;
-        let paceVal: string = pace.value as unknown as string;
-        let descriptionVal: string = description.value as unknown as string;
+    function addWorkout() { //make this function exportable
 
         let workout = {
             "name": session.user?.name as string,
-            "distance": distanceVal as unknown as number,
-            "duration": durationVal as string,
-            "pace": paceVal as unknown as number,
-            "description": descriptionVal as string
+            "distance": distance.value as unknown as number,
+            "duration": duration.value as string,
+            "pace": pace.value as unknown as number,
+            "description": description.value as string
         }
         database.exercises.unshift(workout);
+        distance.value = '';
+        duration.value = '';
+        pace.value = '';
+        description.value = ''
         toggleModal();
     }
 
@@ -70,28 +64,28 @@
                             <div class="column field">
                                 <label for="" class="label">Description</label>
                                 <div class="control has-icons-left">
-                                    <input type="description" placeholder="Description" class="input" required ref="description">
+                                    <input type="description" placeholder="Description" class="input" required v-model="description">
                                 </div>
                             </div>
 
                             <div class="column field">
                                 <label for="" class="label">Duration</label>
                                 <div class="control has-icons-left">
-                                    <input type="duration" placeholder="Duration" class="input" required ref="duration">
+                                    <input type="duration" placeholder="Duration" class="input" required v-model="duration">
                                 </div>
                             </div>
 
                             <div class="column field">
                                 <label for="" class="label">Distance</label>
                                 <div class="control has-icons-left">
-                                    <input type="distance" placeholder="Distance" class="input" required ref="distance">
+                                    <input type="distance" placeholder="Distance" class="input" required v-model="distance">
                                 </div>
                             </div>
 
                             <div class="column field">
                                 <label for="" class="label">Pace</label>
                                 <div class="control has-icons-left">
-                                    <input type="pace" placeholder="Pace" class="input" required ref="pace">
+                                    <input type="pace" placeholder="Pace" class="input" required v-model="pace">
                                 </div>
                             </div>
 

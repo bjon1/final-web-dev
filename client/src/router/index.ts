@@ -25,7 +25,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ProductsView.vue'); //is only called if someone clicks on it
+      component: () => import('../views/ProductsView.vue') //is only called if someone clicks on it
     },
     {
       path: '/about',
@@ -33,7 +33,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue');
+      component: () => import('../views/AboutView.vue')
     },
     {
       path: '/contact',
@@ -41,7 +41,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ContactView.vue');
+      component: () => import('../views/ContactView.vue')
     },
     {
       path: '/stats',
@@ -49,7 +49,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/StatsView.vue');
+      component: () => import('../views/StatsView.vue')
     },
     {
       path: '/exercise',
@@ -57,7 +57,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ExerciseView.vue');
+      component: () => import('../views/ExerciseView.vue')
     },
     {
       path: '/list',
@@ -65,7 +65,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/ToDoView.vue');
+      component: () => import('../views/ToDoView.vue')
     },
     {
       path: '/friends',
@@ -73,7 +73,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/FriendsView.vue');
+      component: () => import('../views/FriendsView.vue')
     },
     {
       path: '/admin',
@@ -81,7 +81,7 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AdminView.vue');
+      component: () => import('../views/AdminView.vue')
     }
   ]
 })
@@ -94,5 +94,6 @@ router.beforeEach((to, from) => {
   if(!!session.user !== loggedInPages.includes(String(to.name))) {
     return false;
   }
+})
 
 export default router;
