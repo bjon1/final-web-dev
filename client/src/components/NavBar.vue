@@ -86,11 +86,11 @@
 
 <nav class="sidebar" v-else>
     <div class="m-4">
-        <a class="navbar-item" to="/stats" style="height: 120px;" >
+        <a class="navbar-item" to="/stats" style="height: 110px;" >
             <img src='../assets/eLogger-logo-black.png' class="logo-sidebar">
-            <div class="logo-sidebar subtitle is-6" style="margin-left: 53px;">eLogger</div>
+            <div class="logo-sidebar subtitle is-6" style="margin-left: 49px;"><span>eLogger</span></div>
         </a>
-        <RouterLink to="/stats" class="navbar-item mb-3">
+        <RouterLink to="/stats" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa fa-line-chart"></i>
@@ -98,34 +98,34 @@
                 <span>Statistics</span>
             </span>
         </RouterLink>
-        <RouterLink to="/exercise" class="navbar-item mb-3">
+        <RouterLink to="/exercise" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-wave-pulse"></i>
+                    <i class="fa-solid fa-dumbbell"></i>
                 </span>
                 <span>Exercise</span>
             </span>
         </RouterLink>
-        <RouterLink to="/list" class="navbar-item mb-3">
+        <RouterLink to="/list" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-wave-pulse"></i>
+                    <i class="fa-solid fa-list-check"></i>
                 </span>
                 <span>Habits</span>
             </span>
         </RouterLink>
-        <RouterLink to="/friends" class="navbar-item mb-3">
+        <RouterLink to="/friends" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-wave-pulse"></i>
+                    <i class="fa-solid fa-user-group"></i>
                 </span>
                 <span>Friends</span>
             </span>
         </RouterLink>
-        <RouterLink to="/products" class="navbar-item mb-3">
+        <RouterLink to="/products" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-wave-pulse"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
                 </span>
                 <span>Products</span>
             </span>
@@ -133,28 +133,50 @@
         <RouterLink v-show="session.user ? session.user.id == 5 : false" to="/admin" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-wave-pulse"></i>
+                    <i class="fa-solid fa-lock"></i>
                 </span>
                 <span>Admin</span>
             </span>
         </RouterLink>
-        <div class="navbar-item" v-if="session.user">
-            <span class="icon-text is-large">
-                <span class="icon">
-                    <img :src="session.user.photo" class="image is-16x16 profile" alt="profile picture"/>
+        <div class="navbar-item has-dropdown is-hoverable" v-if="session.user">
+            <a class="navbar-link">
+                <span class="icon-text is-large">
+                    <span class="icon">
+                        <img :src="session.user.photo" class="image is-16x16 profile" alt="profile picture"/>
+                    </span>
+                    <span>{{ session.user.name }}</span>
                 </span>
-                <span>{{ session.user.name }}</span>
-            </span>
-        </div>
-        <div class="buttons navbar-item">
-            <a class="button is-danger" @click = "logIn(false)">
-            <strong>Sign out</strong>
             </a>
+            <div class="navbar-dropdown is-boxed">
+                <a class="navbar-item">
+                    <span class="icon-text is-large">
+                        <span class="icon">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <strong>My Profile</strong>
+                    </span>
+                </a>
+                <a class="navbar-item">
+                    <span class="icon-text is-large">
+                        <span class="icon">
+                            <i class="fa-solid fa-gear"></i>
+                        </span>
+                        <span>Settings</span>
+                    </span>
+                </a>
+                <a class="navbar-item is-danger" @click = "logIn(false)">
+                    <span class="icon-text is-large">
+                        <span class="icon">
+                            <i class="fa-solid fa-right-from-bracket"></i>
+                        </span>
+                    <span>Sign out</span>
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
     
 </nav>
-
 
 <!--Login screen-->
 <div class="modal" :class="{ 'is-active': isModalActive }" id="signup">
@@ -208,8 +230,6 @@
     padding-bottom: 0.5em;
 }
 
-
-
 .logo {
     transform: scale(1.7);
     margin-left: 4em;
@@ -236,10 +256,10 @@
 }
 
 .sidebar {
-    background-color: white;
-    border-right: 1px solid #d7d6d6;
+    background-color: #ffffffff;
+    border-right: 1px solid #E4E4E4;
     height: 100vh;
-    width: 250px;
+    width: 230px;
     position: fixed;
     z-index: 999;
 }
