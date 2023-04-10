@@ -23,10 +23,10 @@
         description: HTMLInputElement,
         }
     ) {
-        let distanceVal: string = this.distance.value;
-        let durationVal: string = this.duration.value;
-        let paceVal: string = this.pace.value;
-        let descriptionVal: string = this.description.value;
+        let distanceVal: string = distance.value as unknown as string;
+        let durationVal: string = duration.value as unknown as string;
+        let paceVal: string = pace.value as unknown as string;
+        let descriptionVal: string = description.value as unknown as string;
 
         let workout = {
             "name": session.user?.name as string,

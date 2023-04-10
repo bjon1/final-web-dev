@@ -12,7 +12,7 @@
         { name: 'Finish creating todo list', completed: false}
     ])
 
-    function isValidAddItem(item: { completed: any; }) {
+    function isValidAddItem(item: { completed: boolean; }) {
         if(currentTab.value == 'Current' && !item.completed) return true;
         if(currentTab.value == 'Completed' && item.completed) return true;
         if(currentTab.value == 'All') return true;
