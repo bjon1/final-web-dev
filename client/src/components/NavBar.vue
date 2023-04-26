@@ -87,8 +87,8 @@
 <nav class="sidebar" v-else>
     <div class="m-4">
         <a class="navbar-item" to="/stats" style="height: 110px;" >
-            <img src='../assets/eLogger-logo-black.png' class="logo-sidebar">
-            <div class="logo-sidebar subtitle is-6" style="margin-left: 49px;"><span>eLogger</span></div>
+            <!--<img src='../assets/eLogger-logo-black.png' class="logo-sidebar">-->
+            <div class="logo-sidebar subtitle is-6"><span style="margin-left: 15px">eLogger</span></div>
         </a>
         <RouterLink to="/stats" class="navbar-item mb-2">
             <span class="icon-text is-large">
@@ -130,14 +130,29 @@
                 <span>Products</span>
             </span>
         </RouterLink>
-        <RouterLink v-show="session.user ? session.user.id == 5 : false" to="/admin" class="navbar-item mb-3">
-            <span class="icon-text is-large">
-                <span class="icon">
-                    <i class="fa-solid fa-lock"></i>
+
+        <div class="navbar-item has-dropdown is-hoverable mb-3">
+            <RouterLink v-show="session.user ? session.user.id == 5 : false" to="/admin" class="navbar-link">
+                <span class="icon-text is-large">
+                    <span class="icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+                    <span>Admin</span>
                 </span>
-                <span>Admin</span>
-            </span>
-        </RouterLink>
+            </RouterLink>
+            <div class="navbar-dropdown is-boxed">
+                <RouterLink to='/admin/products' class="navbar-item">
+                    <span class="icon-text is-large">
+                        <span class="icon">
+                            <i class="fa-brands fa-product-hunt"></i>
+                        </span>
+                        <strong>Products List</strong>
+                    </span>
+                </RouterLink>
+            </div>
+        </div>
+        
+
         <div class="navbar-item has-dropdown is-hoverable" v-if="session.user">
             <a class="navbar-link">
                 <span class="icon-text is-large">
