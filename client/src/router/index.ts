@@ -81,12 +81,23 @@ const router = createRouter({
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AdminView.vue')
+      component: () => import('../views/admin/AdminView.vue')
+    },
+    {
+      path: '/admin/products',
+      name: 'admin-products',
+      component: () => import('../views/admin/ProductsList.vue')
+    },
+    {
+      path: '/admin/products/edit/:id?',
+      name: 'edit-products',
+      component: () => import('../views/admin/ProductsEdit.vue')
     }
   ]
 })
 
-let loggedInPages = ['stats', 'exercise', 'list', 'friends', 'products', 'admin'];
+let loggedInPages = ['stats', 'exercise', 'list', 'friends', 'products', 'admin', 'edit-products', 'admin-products'];
+
 
 router.beforeEach((to, from) => {
   const session = useSession();
@@ -95,5 +106,6 @@ router.beforeEach((to, from) => {
     return false;
   }
 })
+
 
 export default router;

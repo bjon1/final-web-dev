@@ -16,6 +16,30 @@ $hero-body-padding-medium: 7rem 4rem;
     transform: scale(1.05);
 }
 
+.product-img {
+    border-radius: 12px;
+}
 
+.modal {
+    padding-left: 14em;
+}
+
+.table-photo {
+    height: 100px;
+}
+
+#add-btn {
+    position: fixed;
+    height: 100px;
+    width: 100px;
+    bottom: 60px;
+    right: 60px;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+#add-btn:hover {
+    transform: scale(1.05);
+}
 
 
