@@ -1,5 +1,4 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
   import { useSession } from '@/model/session';
   import database from '../../data/exercises.json'
   import userDatabase from '../../data/database.json'

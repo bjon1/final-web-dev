@@ -1,6 +1,5 @@
 <script setup lang="ts">
-  import database from '../../data/database.json'
-  import database2 from '../../data/exercises.json'
+  import database from '../../../data/database.json'
 </script>
 
 <template>
@@ -32,7 +31,7 @@
             <tbody>
               <tr v-for="(user, index) in database.users" :key="index">
                 <td>
-                  <img :src="user.photo" style="height: 100px">
+                  <img :src="user.photo" class="table-photo">
                 </td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
