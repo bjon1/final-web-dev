@@ -1,6 +1,6 @@
 require('dotenv').config
 
-const products = require('../controllers/products');
+const products = require('./controllers/products');
 const express = require('express');
 const path = require('path');
 const app = express();
