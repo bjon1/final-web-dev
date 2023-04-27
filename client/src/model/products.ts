@@ -1,5 +1,5 @@
-import { fetchData } from "./fetcher";
-import type { DataListEnvelope } from "./fetcher";
+import { api } from "./fetcher";
+import type { DataListEnvelope, DataEnvelope } from "./fetcher";
 
 export interface Product {
     id: number;
@@ -15,6 +15,22 @@ export interface Product {
     images: string[];
 }
 
-export function getProducts(): Promise<DataListEnvelope<Product>> { //A promise object that will resolve in the form of DataListEnvelope, where T = Product[]
-    return fetchData('products'); 
+export function addProduct(product: Product): Promise<DataEnvelope<Product>> {
+    return api("products", "POST", product); 
+}
+
+export function updateProduct(id: number, product: Product): Promise<DataEnvelope<Product>> {
+    return api(`products/${id}`, "PATCH", product);
+}
+
+export function deleteProduct(id: number): Promise<DataEnvelope<Product>> {
+    return api(`products/${id}`, "DELETE")
+}
+
+export function getProducts(): Promise<DataListEnvelope<Product>> { 
+    return api('products', "GET"); 
+}
+
+export function getProduct(id: number): Promise<DataEnvelope<Product>>{
+    return api(`products/${id}`, "GET");
 }

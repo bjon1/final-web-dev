@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/api/v1/';
+const API_URL = import.meta.env.VITE_API_URL ?? '/api/v1/';
 
 export type DataEnvelope<T> = {
     data: T,
@@ -10,7 +10,14 @@ export type DataListEnvelope<T> = DataEnvelope<T[]> & {
     total: number
 }
 
-export async function fetchData(url: string){
-    const res = await fetch(API_URL + url);
-    return await (res.ok ? res.json() : res.json().then(x => { throw ({ ...x, message: x.error }); }));
+export async function api(url: string, method: string, data?: any, headers?: any ){
+    const response = await fetch(API_URL + url, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            ...headers,
+        },
+        body: data ? JSON.stringify(data) : undefined
+    });
+    return await (response.ok ? response.json() : response.json().then(x => { throw ({ ...x, message: x.error }); }));
 }
