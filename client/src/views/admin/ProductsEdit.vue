@@ -42,7 +42,7 @@
             </div>
             <div class="column">
                 <div class="admin-product-edit">
-                    <h1 class="title" v-if="product.id">Edit Product</h1>
+                    <h1 class="title" v-if="productId">Edit Product</h1>
                     <h1 class="title" v-else>Add New Product</h1>
                     <div class="field">
                         <label class="label">Title</label>
@@ -87,7 +87,7 @@
 
                         <div class="field is-grouped">
                             <div class="control">
-                                <button class="button is-link" @click="() => submitUpdate()" v-if="product.id">Update</button>
+                                <button class="button is-link" @click="() => submitUpdate()" v-if="productId">Update</button>
                                 <button class="button is-link" @click="() => submitAdd()" v-else>Add</button>
                             </div>
                             <div class="control">

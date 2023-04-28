@@ -22,7 +22,7 @@ const getAll = async (page=1, pageSize=30) => {
 const getItemById = async (id) => {
     const coll = await collection();
     const item = await coll
-        .findOne({_id: new ObjectId(id)})
+        .findOne({_id: new ObjectId(id)});
     return item;
 }
 

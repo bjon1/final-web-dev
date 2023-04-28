@@ -33,11 +33,11 @@ router
                 const data = {
                     data: item,
                     isSuccess: true
-                }
+                };
                 res.send(data);
             }).catch(next);
     })
-
+    
     .post('/', (req, res, next) => { //addItem()
         model.addItem(req.body)
             .then(item => {

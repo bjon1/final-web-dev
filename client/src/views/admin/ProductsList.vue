@@ -10,7 +10,6 @@
     })
 
     const submitDelete = (id: number) => {
-        console.log(`delete product with ID: ${id}`);
         //show modal 
         deleteProduct(id)
           .then((data) => {
@@ -67,11 +66,11 @@
                   <td>{{ product.stock }}</td>
                   <td>
                     <div class="field is-grouped">
-                      <router-link :to="'/admin/products/edit/' + product.id" class="button" >
+                      <router-link :to="'/admin/products/edit/' + product._id" class="button" >
                         <i class="fas fa-edit"></i>
                       </router-link>
 
-                      <button class="button" @click="submitDelete(product.id)" >
+                      <button class="button" @click="submitDelete(product._id)" >
                           <div class="icon">
                               <i class="fas fa-trash"></i>
                           </div>

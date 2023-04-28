@@ -13,6 +13,7 @@ export interface Product {
     category: string;
     thumbnail: string;
     images: string[];
+    _id: number;
 }
 
 export function addProduct(product: Product): Promise<DataEnvelope<Product>> {
