@@ -1,13 +1,12 @@
-require('dotenv').config
+require('dotenv').config()
 
 const products = require('./controllers/products');
 const express = require('express');
 const path = require('path');
 const app = express();
 
-app
 const hostname = '127.0.0.1';
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3070;
 
 app
     .use(express.json())
@@ -30,8 +29,9 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'))
 })
 
-//Error handling
-app 
+
+// Error handling
+app
     .use((err, req, res, next) => {
         console.error(err);
         const msg = {
@@ -39,10 +39,11 @@ app
             error: err.message || 'Internal Server Error',
             isSuccess: false
         }
-        res.status(msg.status).json(msg);
+        res.status(msg.status).json(msg)
     })
 
-app.listen(port, () => {
-    console.log(`Server is running at https://${hostname}:${port}/`)
-});
+app.listen(port, () => 
+    console.log(`Server is running at http://${hostname}:${port}/`)
+);
+
 

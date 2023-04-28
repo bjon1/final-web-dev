@@ -8,7 +8,7 @@ const collection = async () => { //returns the products collection
     return database.collection(COLLECTION_NAME);
 }
 
-const getAll = async (page, pageSize) => {
+const getAll = async (page=1, pageSize=30) => {
     const coll = await collection();
     const items = await coll
         .find()
@@ -67,7 +67,7 @@ const search = async (searchTerm, page = 1, pageSize = 30) => {
     return { items, total };
 }
 
-const seed = async () => {
+async function seed() {
     const coll = collection();
     const result = await coll.insertMany(data.products);
     return result.insertedCount;
