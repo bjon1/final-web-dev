@@ -24,7 +24,7 @@ const getItemById = async (id) => {
     const item = await coll
         .findOne({_id: new ObjectId(id)});
     return item;
-}
+}  
 
 const addItem = async (item) => {
     const coll = await collection();
@@ -34,16 +34,16 @@ const addItem = async (item) => {
 }
 
 const updateItem = async (item) => {
-
-    console.log(item);
     const col = await collection();
+    const { _id, ...updatedFields } = item;
+
     const result = await col.findOneAndUpdate(
-        { _id: new ObjectId(item.id) },
-        { $set: item },
+        { _id: new ObjectId(_id) },
+        { $set: updatedFields },
         { returnDocument: 'after' }
     );
 
-    return result.value;
+    return result;
 }
 
 const deleteItem = async (id) => {
@@ -61,19 +61,18 @@ const search = async (searchTerm, page = 1, pageSize = 30) => {
             { brand: { $regex: searchTerm, $options: 'i' } }
         ]
     };
-
     const items = await coll.find(query).skip((page - 1) * pageSize).limit(pageSize).toArray();
     const total = await coll.countDocuments(query);
     return { items, total };
 }
 
 async function seed() {
-    const coll = collection();
+    const coll = await collection();
     const result = await coll.insertMany(data.products);
     return result.insertedCount;
 }
 
 module.exports = {
-    getAll, search, getItemById, addItem, updateItem, deleteItem, seed
+    getAll, search, getItemById, addItem, updateItem, deleteItem, seed,
 };
 

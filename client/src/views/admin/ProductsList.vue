@@ -9,7 +9,7 @@
       products.value = data.data;
     })
 
-    const submitDelete = (id: number) => {
+    const submitDelete = (id: string | string[]) => {
         //show modal 
         deleteProduct(id)
           .then((data) => {

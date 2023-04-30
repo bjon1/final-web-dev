@@ -37,6 +37,16 @@ router
                 res.send(data);
             }).catch(next);
     })
+
+    .get('/:id', (req, res, next) => {
+
+        model.getById(req.params.id)
+            .then(x => {
+                const data = { data: x, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+
+    })
     
     .post('/', (req, res, next) => { //addItem()
         model.addItem(req.body)
@@ -72,7 +82,7 @@ router
             }).catch(next);
     })
 
-    .get('/seed', (req, res, next) => {
+    .post('/seed', (req, res, next) => {
         model.seed()
             .then(count => {
                 const data = {

@@ -6,12 +6,14 @@
 
     const route = useRoute();
     const product = ref<Product>({} as Product);
-    const productId = +route.params.id;
+    const productId = route.params.id;
     
-    getProduct(productId)
-        .then((data) => {
-            product.value = data.data ?? {} as Product;
-    })
+    if(productId.length > 0) {
+        getProduct(productId)
+            .then((data) => {
+                product.value = data.data ?? {} as Product;
+            })
+    }
 
     const submitAdd = () => {
         addProduct(product.value)
@@ -21,7 +23,6 @@
 
         console.log("Product Added");
         router.push('/admin/products');
-        
     }
 
     const submitUpdate = () => {
@@ -32,6 +33,7 @@
         console.log("Product Updated");
         router.push('/admin/products');
     }
+    
 </script>
 
 <template>
