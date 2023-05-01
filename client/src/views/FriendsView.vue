@@ -1,10 +1,10 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import { useSession } from '@/model/session';
-  import database from '../../data/exercises.json'
   import userDatabase from '../../data/database.json'
   import ExerciseForm from '../components/ExerciseForm.vue';
   const session = useSession();
+
 
 
     function userImg(name: string) {

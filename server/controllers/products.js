@@ -29,23 +29,13 @@ router
 
     .get('/:id', (req, res, next) => { //getItemById()
         model.getItemById(req.params.id)
-            .then(item => {
+            .then(x => {
                 const data = {
-                    data: item,
+                    data: x,
                     isSuccess: true
                 };
                 res.send(data);
             }).catch(next);
-    })
-
-    .get('/:id', (req, res, next) => {
-
-        model.getById(req.params.id)
-            .then(x => {
-                const data = { data: x, isSuccess: true };
-                res.send(data)
-            }).catch(next);
-
     })
     
     .post('/', (req, res, next) => { //addItem()

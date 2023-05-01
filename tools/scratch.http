@@ -9,7 +9,7 @@ GET http://localhost:{{port}}/api/v1/products?page=1&pageSize=30
 Authorization: Bearer {{jwt}}
 
 ###
-GET http://localhost:{{port}}/api/v1/products/644bff8da54723c5afbd908a
+GET http://localhost:{{port}}/api/v1/products/644c079a5e42700e8fde2ffb
 
 ###
 POST http://localhost:{{port}}/api/v1/products
