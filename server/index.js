@@ -1,6 +1,9 @@
 require('dotenv').config()
 
 const products = require('./controllers/products');
+const users = require('./controllers/users');
+const exercises = require('./controllers/exercises');
+
 const express = require('express');
 const path = require('path');
 const app = express();
@@ -24,6 +27,8 @@ app
         res.send("Hello World, from Express")
     })
     .use('/api/v1/products', products)
+    .use('/api/v1/users', users)
+    .use('/api/v1/exercises', exercises)
 
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'))

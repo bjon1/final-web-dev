@@ -114,7 +114,7 @@
                 <span>Habits</span>
             </span>
         </RouterLink>
-        <RouterLink to="/friends" class="navbar-item mb-2">
+        <RouterLink to="/exercise/friends" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
                     <i class="fa-solid fa-user-group"></i>
@@ -127,7 +127,7 @@
                 <span class="icon">
                     <i class="fa-solid fa-cart-shopping"></i>
                 </span>
-                <span>Products</span>
+                <span>Logger Shop</span>
             </span>
         </RouterLink>
 
