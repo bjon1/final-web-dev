@@ -1,14 +1,11 @@
 <script setup lang="ts">
   import database from '../../../data/database.json'
+  import ThreeColumnLayout from '../../components/ThreeColumnLayout.vue';
 </script>
 
 <template>
-  <div class="section mx-5">
-  <div class="columns is-variable is-8">
-    <div class="column is-one-fifth">
-        <!--Sidebar-->
-    </div>
-    <div class="column">
+  <ThreeColumnLayout>
+    <template #right-column>
       <div class="container has-text-centered">
         <div class="notification is-link">
           <p class="subtitle is-6">
@@ -52,7 +49,6 @@
         </div>
         <span class="has-text-primary">*A higher number indicates more privileges. Adminstrators have a number of 5.</span>
       </div>
-    </div>
-  </div>
-  </div>
+    </template>
+  </ThreeColumnLayout>
 </template>

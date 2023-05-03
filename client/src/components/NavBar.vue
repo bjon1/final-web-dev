@@ -32,15 +32,15 @@
     }
 
     function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
-    let email = emailRef;
-    let password = passwordRef;
+        let email = emailRef;
+        let password = passwordRef;
 
-    if(setLogin(email as string, password as string)){
-        logIn(true);
-        isModalActive.value = false;
-    } else {
-        isInvalidForm.value = true;
-    }
+        if(setLogin(email as string, password as string)){
+            logIn(true);
+            isModalActive.value = false;
+        } else {
+            isInvalidForm.value = true;
+        }
     }
 
 
@@ -90,6 +90,14 @@
             <!--<img src='../assets/eLogger-logo-black.png' class="logo-sidebar">-->
             <div class="logo-sidebar subtitle is-6"><span style="margin-left: 15px">eLogger</span></div>
         </a>
+        <RouterLink to="/exercise/feed" class="navbar-item mb-2">
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-house"></i>
+                </span>
+                <span>Home</span>
+            </span>
+        </RouterLink>
         <RouterLink to="/stats" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
@@ -112,14 +120,6 @@
                     <i class="fa-solid fa-list-check"></i>
                 </span>
                 <span>Habits</span>
-            </span>
-        </RouterLink>
-        <RouterLink to="/exercise/friends" class="navbar-item mb-2">
-            <span class="icon-text is-large">
-                <span class="icon">
-                    <i class="fa-solid fa-user-group"></i>
-                </span>
-                <span>Friends</span>
             </span>
         </RouterLink>
         <RouterLink to="/products" class="navbar-item mb-2">
@@ -276,7 +276,6 @@
     height: 100vh;
     width: 230px;
     position: fixed;
-    z-index: 999;
 }
 
 </style>

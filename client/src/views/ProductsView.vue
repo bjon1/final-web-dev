@@ -1,4 +1,5 @@
 <script setup lang="ts">
+    import ThreeColumnLayout from '../components/ThreeColumnLayout.vue';
     import { ref } from 'vue';
     import { getProducts, type Product } from '../model/products'
     
@@ -28,39 +29,34 @@
 </script>
 
 <template>
-    <div class="section mx-5">
-        <div class="columns">
-            <div class="column is-one-fifth">
-
-            </div>
-            <div class="column">
-                <h1 class="title">
-                    What would you like to buy?
-                </h1>
-                <div class="product-list">
-                    <div class="product box" v-for="product in products" :key="product.id">
-                        <a @click="toggleModal(product.title, product.price, product.description, product.thumbnail)">
-                            <img :src="product.thumbnail" alt="product-image" style="border-radius: 15px;" />
-                            <h1 class = 'title is-4 '>{{ product.title }}</h1>
-                            <p class = 'subtitle is-6'>{{ product.description }}</p>
-                        </a>
-                        <div class="modal" :class="{'is-active': isModalActive}"> 
-                            <div class="modal-background"></div>
-                            <div class="modal-content">
-                                <div class="box">
-                                    <img :src="productModal?.thumbnail" alt="product-image" />
-                                    <h1 class = 'title is-4 '>{{ productModal.title }}</h1>
-                                    <p class = 'subtitle is-6'>{{ productModal.description }}</p>
-                                    <p class = 'subtitle is-6 has-text-weight-bold'>${{ productModal.price }}.00</p>
-                                </div>
+    <ThreeColumnLayout>
+        <template #right-column>
+            <h1 class="title">
+                What would you like to buy?
+            </h1>
+            <div class="product-list">
+                <div class="product box" v-for="product in products" :key="product.id">
+                    <a @click="toggleModal(product.title, product.price, product.description, product.thumbnail)">
+                        <img :src="product.thumbnail" alt="product-image" style="border-radius: 15px;" />
+                        <h1 class = 'title is-4 '>{{ product.title }}</h1>
+                        <p class = 'subtitle is-6'>{{ product.description }}</p>
+                    </a>
+                    <div class="modal" :class="{'is-active': isModalActive}"> 
+                        <div class="modal-background"></div>
+                        <div class="modal-content">
+                            <div class="box">
+                                <img :src="productModal?.thumbnail" alt="product-image" />
+                                <h1 class = 'title is-4 '>{{ productModal.title }}</h1>
+                                <p class = 'subtitle is-6'>{{ productModal.description }}</p>
+                                <p class = 'subtitle is-6 has-text-weight-bold'>${{ productModal.price }}.00</p>
                             </div>
-                        <button class="modal-close is-large" @click="isModalActive=false" aria-label="close"></button>
                         </div>
+                    <button class="modal-close is-large" @click="isModalActive=false" aria-label="close"></button>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </template>
+    </ThreeColumnLayout>
 </template>
 
 <style scoped>

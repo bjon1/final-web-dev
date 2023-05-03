@@ -1,16 +1,11 @@
 <script setup lang = "ts">
-
+  import ThreeColumnLayout from '../components/ThreeColumnLayout.vue';
 </script>
 
 <template>
-  <div class="section mx-5">
-    <div class="columns is-variable is-8">
-      <div class="column is-one-fifth">
-          <!--Sidebar-->
-      </div>
-      <div class="column">
+  <ThreeColumnLayout>
+      <template #right-column>
         <h1 class="title">Charts will be implemented soon...</h1>
-      </div>
-    </div>
-  </div>
+      </template>
+  </ThreeColumnLayout>
 </template>

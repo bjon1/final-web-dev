@@ -36,7 +36,6 @@
     <Modal v-model:is-open="isOpen" :title="'Add a Workout'">
         <template #default>
             <div class="form">
-
                 <div class="column field">
                     <label for="" class="label">Workout</label>
                     <div class="control has-icons-left">
@@ -64,7 +63,6 @@
                 </div>
             </div>
         </template>
-
         <template #footer>
             <button class="button is-link is-fullwidth" @click="() => addWorkout()">Add Workout</button>
         </template>
