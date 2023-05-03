@@ -1,5 +1,6 @@
 <script setup lang="ts">
     import Modal from '../components/Modal.vue';
+    import router from '@/router';
     import { ref } from 'vue';
     import { useSession } from '@/model/session';
     import { addExercise, type Exercise } from '../model/exercises';

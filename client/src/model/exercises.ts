@@ -4,7 +4,7 @@ import type { DataListEnvelope, DataEnvelope } from "./fetcher";
 export interface Exercise {
     _id: string | string[],
     timestamp: string | string[],
-    name: string,
+    name: string | undefined,
     duration: string,
     workout: string,
     description: string

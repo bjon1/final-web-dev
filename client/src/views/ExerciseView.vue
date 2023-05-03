@@ -2,7 +2,7 @@
     import { useSession } from '@/model/session';
     import { useRoute } from 'vue-router';
     import ExerciseForm from '../components/ExerciseForm.vue';
-    import { getExercises, type Exercise } from '@/model/exercises';
+    import { getExercises, deleteExercise, type Exercise } from '@/model/exercises';
     import { ref } from 'vue';
     import userDatabase from '../../data/database.json'
 
@@ -16,6 +16,12 @@
         console.log(data);
         exercises.value = data.data;
     })
+
+    const deleteItem = (id: string | string[]) => {
+        deleteExercise(id).then((data) => {
+            console.log(data);
+        });
+    }
 
     function userImg(name: string | undefined) {
         for(let i = 0; i < userDatabase.users.length; i++){
@@ -66,13 +72,16 @@
                         <nav class="level is-mobile">
                             <div class="level-left">
                                 <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                                    <span class="icon is-small"><i class="fas fa-reply"></i></span>
                                 </a>
                                 <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                                    <span class="icon is-small"><i class="fas fa-retweet"></i></span>
                                 </a>
                                 <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                </a>
+                                <a class="level-item" @click="() => deleteItem(exercise._id)">
+                                    <span class="icon is-small"><i class="fa-solid fa-trash"></i></span>
                                 </a>
                             </div>
                         </nav>
