@@ -1,10 +1,9 @@
 <script setup lang="ts">
     //import Router Link
-    import { RouterLink, useRouter } from 'vue-router';
+    import { RouterLink } from 'vue-router';
     import { ref, type Ref } from 'vue';
-    import { useSession, setLogin } from '@/model/session';
+    import { useSession, useLogin, useLogout } from '@/model/session';
     import router from '@/router';
-
 
     const session = useSession();
     let isMenuActive = ref(false);
@@ -19,31 +18,25 @@
       isMenuActive.value = !isMenuActive.value;
     }
 
-    function logIn(bool: boolean){
-        isLoggedIn.value = bool;
+    function signIn(bool: boolean){ //handles the UI 
+        isLoggedIn.value = bool; 
         if(bool){
-            router.push('/stats');
+            isModalActive.value = false; //close the modal
         } else {
-            session.user = null;
-            router.push('/');
-            console.log(session.user);
+            useLogout();
         }
         return isLoggedIn;
     }
 
-    function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
-        let email = emailRef;
-        let password = passwordRef;
-
-        if(setLogin(email as string, password as string)){
-            logIn(true);
-            isModalActive.value = false;
+    async function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
+        const response = await useLogin(emailRef, passwordRef);
+        if(response) { //if login was successful
+            signIn(true); //update the UI
         } else {
             isInvalidForm.value = true;
         }
     }
-
-
+    
 </script>
 
 <template>
@@ -76,7 +69,7 @@
                 <strong>Sign up</strong>
                 </a>
                 <a class="button is-light is-rounded" @click="isModalActive=true, isInvalidForm=false">
-                Log in
+                    Log in
                 </a>
             </div>
             </div>
@@ -179,7 +172,7 @@
                         <span>Settings</span>
                     </span>
                 </a>
-                <a class="navbar-item is-danger" @click = "logIn(false)">
+                <a class="navbar-item is-danger" @click = "signIn(false)">
                     <span class="icon-text is-large">
                         <span class="icon">
                             <i class="fa-solid fa-right-from-bracket"></i>

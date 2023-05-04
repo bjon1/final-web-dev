@@ -21,3 +21,5 @@ export async function api(url: string, method: string, data?: any, headers?: any
     });
     return await (response.ok ? response.json() : response.json().then(x => { throw ({ ...x, message: x.error }); }));
 }
+
+

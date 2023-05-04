@@ -1,4 +1,5 @@
 const data = require('../data/users.json');
+const jwt = require('jsonwebtoken');
 const { connect, ObjectId } = require('./mongo');
 
 const COLLECTION_NAME = 'users';
@@ -34,10 +35,10 @@ const addItem = async (item) => {
 }
 
 const updateItem = async (item) => {
-    const col = await collection();
+    const coll = await collection();
     const { _id, ...updatedFields } = item;
 
-    const result = await col.findOneAndUpdate(
+    const result = await coll.findOneAndUpdate(
         { _id: new ObjectId(_id) },
         { $set: updatedFields },
         { returnDocument: 'after' }
@@ -47,8 +48,8 @@ const updateItem = async (item) => {
 }
 
 const deleteItem = async (id) => {
-    const col = await collection();
-    const result = await col.deleteOne({ _id: new ObjectId(id) });
+    const coll = await collection();
+    const result = await coll.deleteOne({ _id: new ObjectId(id) });
     return result.deletedCount;
 }
 
@@ -66,13 +67,41 @@ const search = async (searchTerm, page = 1, pageSize = 30) => {
     return { items, total };
 }
 
-async function seed() {
+const login = async (email, password) => {
+    const coll = await collection();
+    const user = await coll.findOne({ email });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    if (user.password !== password) {
+        throw new Error('Invalid password');
+    }
+
+    const cleanUser = { ...user, password: undefined };
+    const token = await generateTokenAsync(cleanUser, process.env.JWT_SECRET, '1d');
+
+    return { user: cleanUser, token };
+}
+
+const generateTokenAsync = (user, secret, expiresIn) => {
+    return new Promise( (resolve, reject) => {
+        jwt.sign(user, secret, { expiresIn }, (err, token) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(token);
+            }
+        });
+    });
+}
+
+const seed = async () => {
     const coll = await collection();
     const result = await coll.insertMany(data.users);
     return result.insertedCount;
 }
 
 module.exports = {
-    getAll, search, getItemById, addItem, updateItem, deleteItem, seed,
+    getAll, search, getItemById, addItem, updateItem, deleteItem, seed, login, generateTokenAsync
 };
 

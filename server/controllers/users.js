@@ -72,6 +72,14 @@ router
             }).catch(next);
     })
 
+    .post('/login', (req, res, next) => {
+        model.login(req.body.email, req.body.password)
+            .then(x => {
+                const data = { data: x, isSuccess: true };
+                res.send(data)
+            }).catch(next);
+    })
+
     .post('/seed', (req, res, next) => {
         model.seed()
             .then(count => {
