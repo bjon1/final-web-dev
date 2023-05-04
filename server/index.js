@@ -28,7 +28,7 @@ app
     .get('/api/v1/', (req, res) => {
         res.send("Hello World, from Express")
     })
-    .use('/api/v1/products', products)
+    .use('/api/v1/products', requireLogin(), products)
     .use('/api/v1/users', users)
     .use('/api/v1/exercises', exercises)
 

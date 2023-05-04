@@ -18,10 +18,15 @@
       isMenuActive.value = !isMenuActive.value;
     }
 
+    function signUp() {
+
+    }
+
     function signIn(bool: boolean){ //handles the UI 
         isLoggedIn.value = bool; 
         if(bool){
             isModalActive.value = false; //close the modal
+            router.push('/stats'); //send the user to /stats
         } else {
             useLogout();
             router.push('/');
@@ -30,15 +35,15 @@
     }
 
     async function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
-        const response = await useLogin(emailRef, passwordRef);
-        console.log("RESPONSE", response);
-        if(response.isSuccess) { //if login was successful
+        const response = await useLogin(emailRef, passwordRef)
+            .catch(error => {
+                isInvalidForm.value = true;  
+                return;
+            });
+
+        if(response && response.isSuccess) { //if login was successful
             signIn(true); //update the UI
-            router.push('/stats'); //send the user to /stats
-        } else {
-            isInvalidForm.value = true;
-            
-        }
+        } 
     }
     
 </script>
@@ -191,6 +196,10 @@
 </nav>
 
 <!--Login screen-->
+
+
+
+
 <div class="modal" :class="{ 'is-active': isModalActive }" id="signup">
     <div class="modal-background"></div>
     <div class="modal-content">
@@ -224,7 +233,7 @@
                 <button class="button is-primary is-fullwidth" type="submit">Login</button>
             </div>
             <div class="has-text-centered">
-                <p class="is-size-7"> Don't have an account? <a href="#" class="has-text-primary">Sign up</a>
+                <p class="is-size-7"> Don't have an account? <a class="has-text-primary" @click="() => signUp()">Sign up</a>
                 </p>
             </div>
         </form>

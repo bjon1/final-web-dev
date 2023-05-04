@@ -11,8 +11,7 @@ export type DataListEnvelope<T> = DataEnvelope<T[]> & {
     total: number
 }
 
-export async function api(url: string, method: string, data?: any, headers?: any ){
-    const session = useSession();
+export async function rest(url: string, method: string, data?: any, headers?: any ){
     
     const response = await fetch(API_URL + url, {
         method: method,

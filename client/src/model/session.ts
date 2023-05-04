@@ -1,10 +1,25 @@
 import { reactive } from "vue";
 import database from '../../data/database.json';
-import { api } from './fetcher';
+import * as fetcher from './fetcher';
 
 const session = reactive({
     user: null as User | null
 });
+
+export function api(url: string, method: string, data?: any, headers?: any ) {
+    if(session.user?.token){
+        
+        headers = {
+            "Authorization": `Bearer ${session.user.token}`,
+            ...headers,
+        }
+    }
+
+    return fetcher.rest(url, method, data, headers)
+        .catch(err => {
+            console.error({err});
+        })
+}
 
 interface User {
     id?: number;
@@ -13,6 +28,7 @@ interface User {
     password?: string;
     photo?: string;
     token?: string;
+    role?: string;
 }
 
 export function useSession() {
@@ -24,14 +40,14 @@ export async function useLogin(email: string | undefined, password: string | und
         email: email,
         password: password
     }
-/*
-    const userDataDefault = {
-        email: "wheed1@newpaltz.edu",
-        password: "pass2"
-    }
+    /*
+        const userDataDefault = {
+            email: "wheed1@newpaltz.edu",
+            password: "pass2"
+        }
     */
-
     const response = await api("users/login", "POST", userData); //change this to userData after testing
+    
     session.user = response.data.user; //update the user
     if(session.user) {
         session.user.token = response.data.token;

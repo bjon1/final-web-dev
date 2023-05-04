@@ -1,9 +1,10 @@
 const express = require('express');
 const model = require('../models/users');
+const { requireLogin } = require('../middleware/authorization');
 const router = express.Router();
 
 router
-    .get('/', (req, res, next) => {
+    .get('/', requireLogin(true), (req, res, next) => {
         model.getAll(+req.query.page, +req.query.pageSize) //getAll
             .then(list => {
                 const data = {
@@ -15,7 +16,7 @@ router
             }).catch(next);
     })
 
-    .get('/search/:q', (req, res, next) => { //search
+    .get('/search/:q', requireLogin(true), (req, res, next) => { //search
         model.search(req.params.q, +req.query.page, +req.query.pageSize)
             .then(list => {
                 const data = {
@@ -27,7 +28,7 @@ router
             }).catch(next);        
     })
 
-    .get('/:id', (req, res, next) => { //getItemById()
+    .get('/:id', requireLogin(), (req, res, next) => { //getItemById()
         model.getItemById(req.params.id)
             .then(x => {
                 const data = {
@@ -38,7 +39,7 @@ router
             }).catch(next);
     })
     
-    .post('/', (req, res, next) => { //addItem()
+    .post('/', requireLogin(true), (req, res, next) => { //addItem()
         model.addItem(req.body)
             .then(item => {
                 const data = {
@@ -49,7 +50,7 @@ router
             }).catch(next);
     })
 
-    .patch('/:id', (req, res, next) => { //updateItem()
+    .patch('/:id', requireLogin(true), (req, res, next) => { //updateItem()
         model.updateItem(req.body)
             .then(item => {
                 const data = {
@@ -61,7 +62,7 @@ router
         
     })
 
-    .delete('/:id', (req, res, next) => { //deleteItem()
+    .delete('/:id', requireLogin(true), (req, res, next) => { //deleteItem()
         model.deleteItem(req.params.id) 
             .then(item => {
                 const data = {
@@ -80,7 +81,7 @@ router
             }).catch(next);
     })
 
-    .post('/seed', (req, res, next) => {
+    .post('/seed', requireLogin(true), (req, res, next) => {
         model.seed()
             .then(count => {
                 const data = {

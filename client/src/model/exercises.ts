@@ -1,4 +1,4 @@
-import { api } from "./fetcher";
+import { api } from "./session";
 import type { DataListEnvelope, DataEnvelope } from "./fetcher";
 
 export interface Exercise {
