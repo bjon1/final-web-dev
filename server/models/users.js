@@ -95,6 +95,18 @@ const generateTokenAsync = (user, secret, expiresIn) => {
     });
 }
 
+function verifyTokenAsync(token) {
+    return new Promise( (resolve, reject) => {
+        jwt.verify(token, process.env.JWT_SECRET ?? "", (err, user) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(user);
+            }
+        });
+    });
+}
+
 const seed = async () => {
     const coll = await collection();
     const result = await coll.insertMany(data.users);
@@ -102,6 +114,6 @@ const seed = async () => {
 }
 
 module.exports = {
-    getAll, search, getItemById, addItem, updateItem, deleteItem, seed, login, generateTokenAsync
+    getAll, search, getItemById, addItem, updateItem, deleteItem, seed, login, generateTokenAsync, verifyTokenAsync
 };
 

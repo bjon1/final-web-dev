@@ -24,16 +24,20 @@
             isModalActive.value = false; //close the modal
         } else {
             useLogout();
+            router.push('/');
         }
         return isLoggedIn;
     }
 
     async function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
         const response = await useLogin(emailRef, passwordRef);
-        if(response) { //if login was successful
+        console.log("RESPONSE", response);
+        if(response.isSuccess) { //if login was successful
             signIn(true); //update the UI
+            router.push('/stats'); //send the user to /stats
         } else {
             isInvalidForm.value = true;
+            
         }
     }
     

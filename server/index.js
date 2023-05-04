@@ -3,6 +3,7 @@ require('dotenv').config()
 const products = require('./controllers/products');
 const users = require('./controllers/users');
 const exercises = require('./controllers/exercises');
+const { requireLogin, parseAuthorizationHeader } = require('./middleware/authorization')
 
 const express = require('express');
 const path = require('path');
@@ -21,6 +22,7 @@ app
         res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
         next()
     })
+    .use(parseAuthorizationHeader)
 
 app
     .get('/api/v1/', (req, res) => {

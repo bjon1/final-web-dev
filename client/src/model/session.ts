@@ -1,7 +1,6 @@
 import { reactive } from "vue";
 import database from '../../data/database.json';
 import { api } from './fetcher';
-import { useRouter } from 'vue-router';
 
 const session = reactive({
     user: null as User | null
@@ -21,30 +20,27 @@ export function useSession() {
 }
 
 export async function useLogin(email: string | undefined, password: string | undefined) {
-    const router = useRouter();
     const userData = {
         email: email,
         password: password
     }
-
+/*
     const userDataDefault = {
         email: "wheed1@newpaltz.edu",
         password: "pass2"
     }
+    */
 
-    const response = await api("users/login", "POST", userDataDefault); //change this to userData after testing
+    const response = await api("users/login", "POST", userData); //change this to userData after testing
     session.user = response.data.user; //update the user
     if(session.user) {
         session.user.token = response.data.token;
-        router.push('/stats'); //send the user to /stats
     }
-    return response.isSuccess;
+    return response;
 }
 
 export function useLogout() {
-    const router = useRouter();
     session.user = null; 
-    router.push('/');
 }
 
 

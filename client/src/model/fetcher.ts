@@ -1,4 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL ?? '/api/v1/';
+import { useSession } from './session';
 
 export type DataEnvelope<T> = {
     data: T,
@@ -11,6 +12,8 @@ export type DataListEnvelope<T> = DataEnvelope<T[]> & {
 }
 
 export async function api(url: string, method: string, data?: any, headers?: any ){
+    const session = useSession();
+    
     const response = await fetch(API_URL + url, {
         method: method,
         headers: {
