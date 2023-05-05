@@ -94,7 +94,7 @@ let loggedInPages = ['stats', 'exercise', 'list', 'friends', 'products', 'admin'
 router.beforeEach((to, from) => {
   const session = useSession();
   //if you're not logged in and want to go to a "logged in page" get sent home
-  if(!session.user !== loggedInPages.includes(String(to.name))) {
+  if(!!session.user !== loggedInPages.includes(String(to.name))) {
     return false;
   }
 })

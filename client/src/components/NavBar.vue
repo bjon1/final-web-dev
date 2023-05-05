@@ -133,8 +133,8 @@
             </span>
         </RouterLink>
 
-        <div class="navbar-item has-dropdown is-hoverable mb-3">
-            <RouterLink v-show="session.user ? session.user.id == 5 : false" to="/admin" class="navbar-link">
+        <div class="navbar-item has-dropdown is-hoverable mb-3" v-show="session.user ? session.user.id == 5 : false">
+            <RouterLink to="/admin" class="navbar-link">
                 <span class="icon-text is-large">
                     <span class="icon">
                         <i class="fa-solid fa-lock"></i>
