@@ -1,5 +1,4 @@
 import { reactive } from "vue";
-import database from '../../data/database.json';
 import * as fetcher from './fetcher';
 
 const session = reactive({

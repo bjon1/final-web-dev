@@ -12,6 +12,11 @@ const router = createRouter({
       component: HomeView //or component: () => import('../views/HomeView.vue')
     },
     {
+      path: '/signup',
+      name: 'signup',
+      component: () => import('../views/SignUp.vue')
+    },
+    {
       path: '/services',
       name: 'services',
       // route level code-splitting
@@ -94,6 +99,10 @@ let loggedInPages = ['stats', 'exercise', 'list', 'friends', 'products', 'admin'
 router.beforeEach((to, from) => {
   const session = useSession();
   //if you're not logged in and want to go to a "logged in page" get sent home
+  if(!session.user && loggedInPages.includes(String(to.name))) {
+    router.push('/');
+  }
+  
   if(!!session.user !== loggedInPages.includes(String(to.name))) {
     return false;
   }
