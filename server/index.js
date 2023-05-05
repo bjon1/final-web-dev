@@ -9,7 +9,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const hostname = 'https://elogger.onrender.com';
+const hostname = '127.0.0.1';
 const port = process.env.PORT || 3070;
 
 app
