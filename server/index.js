@@ -9,7 +9,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 
-const hostname = '127.0.0.1';
+const hostname = 'https://elogger.onrender.com';
 const port = process.env.PORT || 3070;
 
 app
@@ -54,7 +54,7 @@ app
     })
 
 app.listen(port, () => 
-    console.log(`Server is running at http://${hostname}:${port}/`)
+    console.log(`Server is running at ${hostname}:${port}/`)
 );
 
 
