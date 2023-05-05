@@ -38,7 +38,6 @@
 <template>
     <ThreeColumnLayout>
         <template #right-column-left>
-            <ExerciseForm />
             <h1 class="title" v-show="!name">Your Exercise Activity</h1>
             <div v-for="(exercise, index) in (name === 'feed' ? exercises : exercises.filter((elem) => elem.name == session.user?.name))" :key="index" class="box">
                 <article class="media">
@@ -49,7 +48,7 @@
                     </figure>
                     <div class="media-content">
                         <div class="content">
-                            <strong>{{ exercise.name }}</strong> <small>@johnsmith</small> <small>31m</small>
+                            <strong>{{ exercise.name }}</strong> <small>@johnsmith</small> <small>{{ exercise.timestamp }}</small>
                             <br>
                             {{ exercise.description }}
                             <br>

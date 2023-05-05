@@ -6,7 +6,7 @@
     }>();
 
     const emit = defineEmits<{
-        (e:'update:isOpen', value: boolean): void;
+        (e:'update'): void;
     }>();
 
 </script>
@@ -18,7 +18,7 @@
             <header class="modal-card-head">
                 <slot name="header">
                     <div class="modal-card-title has-text-weight-bold">{{ props.title }}</div>
-                    <button class="delete" @click="emit('update:isOpen', false)"></button>
+                    <button class="delete" @click="emit('update')"></button>
                 </slot>
             </header>
             <section class="modal-card-body">
@@ -27,7 +27,7 @@
             <footer class="modal-card-foot">
                 <slot name="footer">
                     <button class="button is-success">Save changes</button>
-                    <button class="button" @click="emit('update:isOpen', false)">Cancel</button>
+                    <button class="button" @click="emit('update')">Cancel</button>
                 </slot>
             </footer>
         </div>

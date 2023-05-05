@@ -2,48 +2,22 @@
     //import Router Link
     import { RouterLink } from 'vue-router';
     import { ref, type Ref } from 'vue';
-    import { useSession, useLogin, useLogout } from '@/model/session';
+    import { useSession, useLogout } from '@/model/session';
     import router from '@/router';
+    import LoginModal from './LoginModal.vue';
+    import ExerciseForm from './ExerciseForm.vue';
 
     const session = useSession();
     let isMenuActive = ref(false);
     let isModalActive = ref(false);
-    let isInvalidForm = ref(false);
-    let isLoggedIn = ref(false);
+    let openExercise = ref(false);
     
-    const email: Ref<HTMLInputElement | undefined> = ref(undefined);
-    const password: Ref<HTMLInputElement | undefined> = ref(undefined);
-
     function toggleMenu() {
       isMenuActive.value = !isMenuActive.value;
     }
 
-    function signUp() {
-
-    }
-
-    function signIn(bool: boolean){ //handles the UI 
-        isLoggedIn.value = bool; 
-        if(bool){
-            isModalActive.value = false; //close the modal
-            router.push('/stats'); //send the user to /stats
-        } else {
-            useLogout();
-            router.push('/');
-        }
-        return isLoggedIn;
-    }
-
-    async function checkLogin(emailRef: string | undefined, passwordRef: string | undefined) {
-        const response = await useLogin(emailRef, passwordRef)
-            .catch(error => {
-                isInvalidForm.value = true;  
-                return;
-            });
-
-        if(response && response.isSuccess) { //if login was successful
-            signIn(true); //update the UI
-        } 
+    const updateOpenExercise = () => {
+        openExercise.value = !openExercise.value;
     }
     
 </script>
@@ -51,7 +25,7 @@
 <template>
 
 
-<nav class="navbar is-spaced is-link" v-if="isLoggedIn == false">
+<nav class="navbar is-spaced is-link" v-if="session.user === null">
     <div class="navbar-brand">
         <a class="navbar-item logo" href="/">
             <img src='../assets/eLogger-logo.png' style="margin-right: 0.3em;">
@@ -77,7 +51,7 @@
                 <a class="button is-danger is-rounded" v-show="isMenuActive != true">
                 <strong>Sign up</strong>
                 </a>
-                <a class="button is-light is-rounded" @click="isModalActive=true, isInvalidForm=false">
+                <a class="button is-light is-rounded" @click="isModalActive=true">
                     Log in
                 </a>
             </div>
@@ -124,6 +98,7 @@
                 <span>Habits</span>
             </span>
         </RouterLink>
+
         <RouterLink to="/products" class="navbar-item mb-2">
             <span class="icon-text is-large">
                 <span class="icon">
@@ -132,6 +107,15 @@
                 <span>Logger Shop</span>
             </span>
         </RouterLink>
+
+        <a class="navbar-item mb-2" @click="updateOpenExercise" >
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-plus"></i>
+                </span>
+                <span>Create</span>
+            </span>
+        </a>       
 
         <div class="navbar-item has-dropdown is-hoverable mb-3" v-show="session.user ? session.user.id == 5 : false">
             <RouterLink to="/admin" class="navbar-link">
@@ -181,7 +165,7 @@
                         <span>Settings</span>
                     </span>
                 </a>
-                <a class="navbar-item is-danger" @click = "signIn(false)">
+                <a class="navbar-item is-danger" @click="session.user = null, router.push('/');">
                     <span class="icon-text is-large">
                         <span class="icon">
                             <i class="fa-solid fa-right-from-bracket"></i>
@@ -192,58 +176,11 @@
             </div>
         </div>
     </div>
-    
 </nav>
 
-<!--Login screen-->
+<ExerciseForm :is-open="openExercise" @update="updateOpenExercise" />
+<LoginModal :is-modal-active="isModalActive" @updateModal="() => isModalActive = !isModalActive" />
 
-
-
-
-<div class="modal" :class="{ 'is-active': isModalActive }" id="signup">
-    <div class="modal-background"></div>
-    <div class="modal-content">
-        <form @submit.prevent="() => checkLogin(email?.value as string, password?.value as string)" class="box">
-            <div class="column field">
-                <label for="" class="label">Email</label>
-                <div class="control has-icons-left">
-                    <input type="email" placeholder="Enter your email" class="input" :class="{'is-danger': isInvalidForm}" required ref="email">
-                    <span class="icon is-small is-left">
-                        <i class="fa fa-envelope"></i>
-                    </span>
-                </div>
-            </div>
-            <div class="column field">
-                <label for="" class="label">Password</label>
-                <div class="control has-icons-left">
-                    <input type="password" placeholder="Enter your password" class="input" :class="{'is-danger': isInvalidForm}" required ref="password">
-                    <span class="icon is-small is-left">
-                        <i class="fa fa-lock"></i>
-                    </span>
-                </div>
-                <a class="is-size-7 has-text-primary">forgot your password?</a>
-            </div>
-            <div class="column">
-                <div class="icon-text" v-show="isInvalidForm == true">
-                    <span class="icon">
-                        <i class='fa fa-warning is-large' style="color:red"></i>
-                    </span>
-                    <span class="has-text-danger is-size-7">Invalid Email or Password</span>
-                </div>
-                <button class="button is-primary is-fullwidth" type="submit">Login</button>
-            </div>
-            <div class="has-text-centered">
-                <p class="is-size-7"> Don't have an account? <a class="has-text-primary" @click="() => signUp()">Sign up</a>
-                </p>
-            </div>
-        </form>
-    </div>
-
-    <button class="modal-close is-large" @click="isModalActive=false" aria-label="close"></button>
-    <button class="js-modal-trigger is-warning" data-target="signup">
-        Signup
-    </button>
-</div> 
 </template>
 
 <style scoped>

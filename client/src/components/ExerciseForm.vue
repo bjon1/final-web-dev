@@ -1,18 +1,19 @@
 <script setup lang="ts">
     import Modal from '../components/Modal.vue';
-    import router from '@/router';
     import { ref } from 'vue';
     import { useSession } from '@/model/session';
     import { addExercise, type Exercise } from '../model/exercises';
 
+    const props = defineProps<{
+        isOpen: boolean
+    }>()
+
+    const emit = defineEmits<{
+        (e:'update'): void;
+    }>();
+
     const session = useSession();
-    const isOpen = ref(false);
-
     const exercise = ref<Exercise>({} as Exercise);
-
-    function toggleModal() {
-        isOpen.value = !isOpen.value;
-    }
 
     const addWorkout = () => { //make this function exportable
         exercise.value.name = session.user?.name;
@@ -23,17 +24,13 @@
         exercise.value.duration = '';
         exercise.value.workout = '';
         exercise.value.description = '';
-        toggleModal();
+        emit('update');
     }
     
 </script>
 
 <template>
-    <div class="button is-link" id="add-btn" @click="toggleModal">
-        <i class="fa-solid fa-plus fa-2x"></i>
-    </div>
-
-    <Modal v-model:is-open="isOpen" :title="'Add a Workout'">
+    <Modal :title="'Add a Workout'" :is-open="props.isOpen" @update="() => emit('update')">
         <template #default>
             <div class="form">
                 <div class="column field">
@@ -67,9 +64,6 @@
             <button class="button is-link is-fullwidth" @click="() => addWorkout()">Add Workout</button>
         </template>
     </Modal>
-
-
-
 </template>
 
 <style scoped>
