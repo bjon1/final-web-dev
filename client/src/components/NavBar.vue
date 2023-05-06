@@ -48,7 +48,7 @@
             <RouterLink to="/contact" class="navbar-item">Contact</RouterLink>
             <div class="navbar-item">
             <div class="buttons">
-                <a class="button is-danger is-rounded" v-show="isMenuActive != true">
+                <a class="button is-danger is-rounded" v-show="isMenuActive != true" @click="() => router.push('/signup')">
                 <strong>Sign up</strong>
                 </a>
                 <a class="button is-light is-rounded" @click="isModalActive=true">
