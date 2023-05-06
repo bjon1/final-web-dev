@@ -128,7 +128,7 @@
             </span>
         </a>       
 
-        <div class="navbar-item has-dropdown is-hoverable mb-3" v-show="session.user ? session.user.id == 5 : false">
+        <div class="navbar-item has-dropdown is-hoverable mb-3" v-show="session.user ? session.user.role == 'admin' : false">
             <RouterLink to="/admin" class="navbar-link">
                 <span class="icon-text is-large">
                     <span class="icon">
