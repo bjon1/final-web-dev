@@ -39,27 +39,27 @@
         <template #default>
             <div class="form">
 
-                <div class="column field">
+                <div class="column">
                     <label class="label">Select a Category:</label>
                     <div class="control has-icons-left">
                         <div class="select">
                             <select required v-model="exercise.category" placeholder="Choose one">
                                 <option value="" selected disabled>Choose one</option>
                                 <option>cardio</option>
-                                <option>weights</option>
+                                <option>weight</option>
                             </select>
                         </div>
                     </div>
                 </div>
 
-                <div class="column field">
+                <div class="column">
                     <label for="" class="label">Workout</label>
                     <div class="control has-icons-left">
                         <input type="workout" placeholder="Workout" class="input" required v-model="exercise.workout">
                     </div>
                 </div>
 
-                <div class="column field">
+                <div class="column">
                     <label for="" class="label">Description</label>
                     <div class="control has-icons-left">
                         <textarea 
@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
-                <div class="column field">
+                <div class="column">
                     <label for="" class="label">Sets</label>
                     <div class="control has-icons-left">
                         <input type="sets" placeholder="Sets" class="input" required v-model="exercise.sets">
@@ -79,7 +79,7 @@
                 </div>
 
 
-                <div class="column field">
+                <div class="column">
                     <label for="" class="label">Reps</label>
                     <div class="control has-icons-left">
                         <input type="reps" placeholder="Reps" class="input" required v-model="exercise.reps">
@@ -87,7 +87,7 @@
                 </div>
 
 
-                <div class="column field">
+                <div class="column">
                     <label for="" class="label">Duration (per rep)</label>
                     <div class="control has-icons-left">
                         <input type="duration" placeholder="mm:ss" class="input" required v-model="exercise.duration">

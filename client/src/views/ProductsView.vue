@@ -31,9 +31,6 @@
 <template>
     <ThreeColumnLayout>
         <template #right-column>
-            <h1 class="title">
-                What would you like to buy?
-            </h1>
             <div class="product-list">
                 <div class="product box" v-for="product in products" :key="product.id">
                     <a @click="toggleModal(product.title, product.price, product.description, product.thumbnail)">
