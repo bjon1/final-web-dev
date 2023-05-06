@@ -39,7 +39,7 @@ router
             }).catch(next);
     })
     
-    .post('/', requireLogin(true), (req, res, next) => { //addItem()
+    .post('/', (req, res, next) => { //addItem()
         model.addItem(req.body)
             .then(item => {
                 const data = {

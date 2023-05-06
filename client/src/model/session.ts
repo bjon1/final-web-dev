@@ -1,13 +1,23 @@
 import { reactive } from "vue";
 import * as fetcher from './fetcher';
 
+interface User {
+    id?: number;
+    name?: string;
+    email?: string;
+    password?: string;
+    photo?: string;
+    token?: string;
+    role?: string;
+}
+
 const session = reactive({
     user: null as User | null
 });
 
 export function api(url: string, method: string, data?: any, headers?: any ) {
+
     if(session.user?.token){
-        
         headers = {
             "Authorization": `Bearer ${session.user.token}`,
             ...headers,
@@ -20,16 +30,6 @@ export function api(url: string, method: string, data?: any, headers?: any ) {
         })
 }
 
-interface User {
-    id?: number;
-    name: string;
-    email?: string;
-    password?: string;
-    photo?: string;
-    token?: string;
-    role?: string;
-}
-
 export function useSession() {
     return session;
 }
@@ -39,14 +39,8 @@ export async function useLogin(email: string | undefined, password: string | und
         email: email,
         password: password
     }
-    /*
-        const userDataDefault = {
-            email: "wheed1@newpaltz.edu",
-            password: "pass2"
-        }
-    */
+
     const response = await api("users/login", "POST", userData); //change this to userData after testing
-    
     session.user = response.data.user; //update the user
     if(session.user) {
         session.user.token = response.data.token;
@@ -58,22 +52,16 @@ export function useLogout() {
     session.user = null; 
 }
 
+export async function createUser(name: string, email: string, password: string) {
+    const newUser = {
+        name: name,
+        email: email,
+        password: password,
+        role: "user"
+    } as User
 
+    const response = await api("users/", 'POST', newUser);
+                     await useLogin(email, password);
 
-/*
-export function setLogin(email: string, password: string) {
-
-    for(let i = 0; i < database.users.length; i++){
-        if(database.users[i].email == email && database.users[i].password == password){
-            session.user = {
-                id: database.users[i].id,
-                name: database.users[i].name,
-                email: database.users[i].email,
-                photo: database.users[i].photo
-            }
-            return true;
-        }
-    }
-    return false;
+    return response;
 }
-*/

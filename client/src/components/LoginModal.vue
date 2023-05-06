@@ -21,10 +21,7 @@
     const signIn = (bool: boolean) => { //handles the UI 
         if(bool){
             emit('updateModal');
-            router.push('/exercise/feed'); //send the user to /stats
-        } else {
-            useLogout();
-            router.push('/');
+            router.push('/exercise/feed'); 
         }
     }
 
@@ -35,9 +32,7 @@
                 return;
             });
 
-        if(response && response.isSuccess) { //if login was successful
             signIn(true); //update the UI
-        } 
     }
 
     const signupPage = () => {
