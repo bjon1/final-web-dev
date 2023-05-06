@@ -72,59 +72,59 @@
 </nav>
 
 <nav class="sidebar" v-else>
-    <div class="m-4">
-        <a class="navbar-item" to="/stats" style="height: 110px;" >
-            <!--<img src='../assets/eLogger-logo-black.png' class="logo-sidebar">-->
+    <div class="m-3">
+        <a class="navbar-item" to="/stats" style="height: 100px;" >
+            <img src='../assets/eLogger-logo-black.png' class="logo">
             <div class="logo-sidebar subtitle is-6"><span style="margin-left: 15px">eLogger</span></div>
         </a>
-        <RouterLink to="/exercise/feed" class="navbar-item mb-2">
+        <RouterLink to="/exercise/feed" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-house"></i>
+                    <i class="fa-solid fa-house fa-xl"></i>
                 </span>
-                <span>Home</span>
+                <span class="navbar-text">Home</span>
             </span>
         </RouterLink>
-        <RouterLink to="/stats" class="navbar-item mb-2">
+        <RouterLink to="/stats" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa fa-line-chart"></i>
+                    <i class="fa fa-line-chart fa-xl"></i>
                 </span>
-                <span>Statistics</span>
+                <span class="navbar-text">Statistics</span>
             </span>
         </RouterLink>
-        <RouterLink to="/exercise" class="navbar-item mb-2">
+        <RouterLink to="/exercise" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-dumbbell"></i>
+                    <i class="fa-solid fa-dumbbell fa-xl"></i>
                 </span>
-                <span>Exercise</span>
+                <span class="navbar-text">Exercise</span>
             </span>
         </RouterLink>
-        <RouterLink to="/list" class="navbar-item mb-2">
+        <RouterLink to="/list" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-list-check"></i>
+                    <i class="fa-solid fa-list-check fa-xl"></i>
                 </span>
-                <span>Habits</span>
-            </span>
-        </RouterLink>
-
-        <RouterLink to="/products" class="navbar-item mb-2">
-            <span class="icon-text is-large">
-                <span class="icon">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </span>
-                <span>Logger Shop</span>
+                <span class="navbar-text">Habits</span>
             </span>
         </RouterLink>
 
-        <a class="navbar-item mb-2" @click="updateOpenExercise" >
+        <RouterLink to="/products" class="navbar-item mb-3">
             <span class="icon-text is-large">
                 <span class="icon">
-                    <i class="fa-solid fa-plus"></i>
+                    <i class="fa-solid fa-cart-shopping fa-xl"></i>
                 </span>
-                <span>Create</span>
+                <span class="navbar-text">Logger Shop</span>
+            </span>
+        </RouterLink>
+
+        <a class="navbar-item mb-3" @click="updateOpenExercise" >
+            <span class="icon-text is-large">
+                <span class="icon">
+                    <i class="fa-solid fa-plus fa-xl" ></i>
+                </span>
+                <span class="navbar-text">Create</span>
             </span>
         </a>       
 
@@ -132,18 +132,18 @@
             <RouterLink to="/admin" class="navbar-link">
                 <span class="icon-text is-large">
                     <span class="icon">
-                        <i class="fa-solid fa-lock"></i>
+                        <i class="fa-solid fa-lock fa-xl"></i>
                     </span>
-                    <span>Admin</span>
+                    <span class="navbar-text">Admin</span>
                 </span>
             </RouterLink>
             <div class="navbar-dropdown is-boxed">
                 <RouterLink to='/admin/products' class="navbar-item">
                     <span class="icon-text is-large">
                         <span class="icon">
-                            <i class="fa-brands fa-product-hunt"></i>
+                            <i class="fa-brands fa-product-hunt fa-xl"></i>
                         </span>
-                        <strong>Products List</strong>
+                        <strong class="navbar-text">Products List</strong>
                     </span>
                 </RouterLink>
             </div>
@@ -154,9 +154,9 @@
             <a class="navbar-link">
                 <span class="icon-text is-large">
                     <span class="icon">
-                        <img :src="session.user.photo" class="image is-16x16 profile" alt="profile picture"/>
+                        <img :src="session.user.photo" class="image is-20x20 profile" alt="profile picture"/>
                     </span>
-                    <span>{{ session.user.name }}</span>
+                    <span class="navbar-text" >{{ session.user.name?.split(' ')[0] }}</span>
                 </span>
             </a>
             <div class="navbar-dropdown is-boxed">
@@ -165,15 +165,7 @@
                         <span class="icon">
                             <i class="fa-solid fa-user"></i>
                         </span>
-                        <strong>My Profile</strong>
-                    </span>
-                </a>
-                <a class="navbar-item">
-                    <span class="icon-text is-large">
-                        <span class="icon">
-                            <i class="fa-solid fa-gear"></i>
-                        </span>
-                        <span>Settings</span>
+                        <strong class="navbar-text">My Profile</strong>
                     </span>
                 </a>
                 <a class="navbar-item is-danger" @click="session.user = null, router.push('/');">
@@ -181,7 +173,7 @@
                         <span class="icon">
                             <i class="fa-solid fa-right-from-bracket"></i>
                         </span>
-                    <span>Sign out</span>
+                    <span class="navbar-text" >Sign out</span>
                     </span>
                 </a>
             </div>
@@ -200,15 +192,14 @@
 }
 
 .logo {
-    transform: scale(1.7);
-    margin-left: 4em;
-    margin-top: 0.5em;
+    display: none;
 }
 
 .logo-sidebar {
     transform: scale(2.0);  
     margin-left: 0.6em;
 }
+
 
 .menu {
     padding-left: 2em;
@@ -228,8 +219,35 @@
     background-color: #ffffffff;
     border-right: 1px solid #E4E4E4;
     height: 100vh;
-    width: 230px;
+    width: 19vw;
     position: fixed;
+    z-index: 3;
 }
+
+.navbar-text {
+    margin-left: 0.9em;
+}
+
+@media (max-width: 1024px) {
+
+    .navbar-text {
+        display: none;
+    }
+    .sidebar {
+        width: 75px;
+    }
+
+    .logo-sidebar {
+        display: none;
+    }
+
+    .logo {
+        transform: scale(1.5);
+        margin-top: 2em;
+        display: block;
+    }
+}
+
+
 
 </style>

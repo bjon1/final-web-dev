@@ -53,7 +53,7 @@
                     </figure>
                     <div class="media-content">
                         <div class="content">
-                            <strong>{{ exercise.name }}</strong> <small>@johnsmith</small> <small>{{ exercise.timestamp }}</small>
+                            <strong>{{ exercise.name }}</strong> <small>{{ exercise.timestamp }}</small>
                             <br>
                             {{ exercise.description }}
                             <br>
