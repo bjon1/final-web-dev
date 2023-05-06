@@ -21,9 +21,14 @@
             .then(data => {
                 console.log(data);
             });
-        exercise.value.duration = '';
+
+        exercise.value.category = '';
         exercise.value.workout = '';
         exercise.value.description = '';
+        exercise.value.sets = '';
+        exercise.value.reps = '';
+        exercise.value.duration = '';
+
         emit('update');
     }
     
@@ -33,6 +38,20 @@
     <Modal :title="'Add a Workout'" :is-open="props.isOpen" @update="() => emit('update')">
         <template #default>
             <div class="form">
+
+                <div class="column field">
+                    <label class="label">Select a Category:</label>
+                    <div class="control has-icons-left">
+                        <div class="select">
+                            <select required v-model="exercise.category" placeholder="Choose one">
+                                <option value="" selected disabled>Choose one</option>
+                                <option>cardio</option>
+                                <option>weights</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="column field">
                     <label for="" class="label">Workout</label>
                     <div class="control has-icons-left">
@@ -53,9 +72,25 @@
                 </div>
 
                 <div class="column field">
-                    <label for="" class="label">Duration</label>
+                    <label for="" class="label">Sets</label>
                     <div class="control has-icons-left">
-                        <input type="duration" placeholder="Duration" class="input" required v-model="exercise.duration">
+                        <input type="sets" placeholder="Sets" class="input" required v-model="exercise.sets">
+                    </div>
+                </div>
+
+
+                <div class="column field">
+                    <label for="" class="label">Reps</label>
+                    <div class="control has-icons-left">
+                        <input type="reps" placeholder="Reps" class="input" required v-model="exercise.reps">
+                    </div>
+                </div>
+
+
+                <div class="column field">
+                    <label for="" class="label">Duration (per rep)</label>
+                    <div class="control has-icons-left">
+                        <input type="duration" placeholder="mm:ss" class="input" required v-model="exercise.duration">
                     </div>
                 </div>
             </div>

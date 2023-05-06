@@ -36,6 +36,8 @@
                 return userDatabase.users[i].photo;
             }
         }
+
+        return "https://i.pinimg.com/1200x/47/77/ae/4777ae0906dd0113ad0bb00d61125d1b.jpg"
     }
 
 </script>
@@ -51,27 +53,31 @@
                             <img :src="userImg(exercise.name)">
                         </p>    
                     </figure>
+                    
                     <div class="media-content">
                         <div class="content">
-                            <strong>{{ exercise.name }}</strong> <small>{{ exercise.timestamp }}</small>
-                            <br>
-                            {{ exercise.description }}
-                            <br>
+                            <strong class="title is-4">{{ exercise.workout }}</strong> <small>{{ exercise.timestamp }}</small>
+                            <p class="subtitle is-6">{{ exercise.name?.split(' ')[0] }}</p>
+                            <p>{{ exercise.description }}</p>
                             <div class="column is-flex is-centered is-justify-content-space-around" >
                                 <div>
-                                    <div class="title" style="margin: 0px">{{ exercise.workout }}</div>
-                                    <div class="heading ">Workout</div>
+                                    <div class="heading ">Sets</div>
+                                    <div class="title is-4" style="margin: 0px">{{ exercise.sets }}</div>
+                                </div>
+                                <div v-show="exercise.category === 'weight'">
+                                    <div class="heading">Reps</div>
+                                    <div class="title is-4" style="margin: 0px">{{ exercise.reps }}</div>
                                 </div>
                                 <div>
-                                    <div class="title" style="margin: 0px">{{ exercise.duration }}s</div>
                                     <div class="heading">Duration</div>
+                                    <div class="title is-4" style="margin: 0px">{{ exercise.duration }}</div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">
-                            <a class="level-item" @click="() => updateItem()">
+                            <a class="level-item" v-show="exercise.name === session.user?.name" @click="() => updateItem()">
                                 <span class="icon is-small"><i class="fa-solid fa-pen-to-square"></i></span>
                             </a>
                             <a class="level-item" @click="() => deleteItem(exercise._id)">

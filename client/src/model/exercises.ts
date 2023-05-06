@@ -4,10 +4,13 @@ import type { DataListEnvelope, DataEnvelope } from "./fetcher";
 export interface Exercise {
     _id: string | string[],
     timestamp: string | string[],
+    category: string,
     name: string | undefined,
-    duration: string,
     workout: string,
-    description: string
+    description: string,
+    sets: number | string,
+    reps?: number | string,
+    duration: string
 }
 
 export function addExercise(exercise: Exercise): Promise<DataEnvelope<Exercise>> {
