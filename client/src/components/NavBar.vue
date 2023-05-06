@@ -8,9 +8,20 @@
     import ExerciseForm from './ExerciseForm.vue';
 
     const session = useSession();
+    let mode = ref<string | undefined>(undefined); //sign-in, sign-up, or undefined
     let isMenuActive = ref(false);
     let isModalActive = ref(false);
     let openExercise = ref(false);
+
+    const onUpdateModal = () => {
+        isModalActive.value = !isModalActive.value
+        mode.value = undefined;
+    }
+
+    const onUpdateMode = (m: string | undefined) => {
+        mode.value = m;
+    }
+   
     
     function toggleMenu() {
       isMenuActive.value = !isMenuActive.value;
@@ -48,10 +59,10 @@
             <RouterLink to="/contact" class="navbar-item">Contact</RouterLink>
             <div class="navbar-item">
             <div class="buttons">
-                <a class="button is-danger is-rounded" v-show="isMenuActive != true" @click="() => router.push('/signup')">
+                <a class="button is-danger is-rounded" v-show="isMenuActive != true" @click="isModalActive=true, mode='sign-up'">
                 <strong>Sign up</strong>
                 </a>
-                <a class="button is-light is-rounded" @click="isModalActive=true">
+                <a class="button is-light is-rounded" @click="isModalActive=true, mode='sign-in'">
                     Log in
                 </a>
             </div>
@@ -179,7 +190,7 @@
 </nav>
 
 <ExerciseForm :is-open="openExercise" @update="updateOpenExercise" />
-<LoginModal :is-modal-active="isModalActive" @updateModal="() => isModalActive = !isModalActive" />
+<LoginModal :is-modal-active="isModalActive" :mode="mode" @updateModal="onUpdateModal" @updateMode="onUpdateMode"/>
 
 </template>
 
