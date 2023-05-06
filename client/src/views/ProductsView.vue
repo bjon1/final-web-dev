@@ -5,7 +5,7 @@
     
     const products = ref<Product[]>([]);
     getProducts().then((data) => {
-        products.value = data.data;
+        products.value = data.data.reverse();
     })
 
     let isModalActive = ref(false);

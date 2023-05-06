@@ -1,28 +1,33 @@
 <script setup lang="ts">
     import { useSession } from '@/model/session';
     import { useRoute } from 'vue-router';
-    import ExerciseForm from '../components/ExerciseForm.vue';
     import ThreeColumnLayout from '../components/ThreeColumnLayout.vue'
     import { getExercises, deleteExercise, type Exercise } from '@/model/exercises';
     import { ref, computed } from 'vue';
     import userDatabase from '../../data/database.json'
 
-
     const route = useRoute();
     const name = computed(() => route.params.name);
-
     const session = useSession();
-
     const exercises = ref<Exercise[]>([]);
-    getExercises().then((data) => {
-        console.log(data);
-        exercises.value = data.data.reverse();
-    })
+    
+    const fetchExercises = () => {
+        getExercises().then((data) => {
+            exercises.value = data.data.reverse();
+        })
+        setTimeout(fetchExercises, 1000);
+    }
+
+    fetchExercises();
 
     const deleteItem = (id: string | string[]) => {
         deleteExercise(id).then((data) => {
             console.log(data);
         });
+    }
+
+    const updateItem = () => {
+        console.log("Update Item");
     }
 
     function userImg(name: string | undefined) {
@@ -66,14 +71,8 @@
                     </div>
                     <nav class="level is-mobile">
                         <div class="level-left">
-                            <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-reply"></i></span>
-                            </a>
-                            <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-retweet"></i></span>
-                            </a>
-                            <a class="level-item">
-                                <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                            <a class="level-item" @click="() => updateItem()">
+                                <span class="icon is-small"><i class="fa-solid fa-pen-to-square"></i></span>
                             </a>
                             <a class="level-item" @click="() => deleteItem(exercise._id)">
                                 <span class="icon is-small"><i class="fa-solid fa-trash"></i></span>
