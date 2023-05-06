@@ -1,8 +1,8 @@
 import { reactive } from "vue";
 import * as fetcher from './fetcher';
 
-interface User {
-    id?: number;
+export interface User {
+    _id: string;
     name?: string;
     email?: string;
     password?: string;
@@ -63,5 +63,14 @@ export async function createUser(name: string, email: string, password: string) 
     const response = await api("users/", 'POST', newUser);
                      await useLogin(email, password);
 
+    return response;
+}
+
+export async function deleteUser(id: string) {
+    return api(`users/${id}`, "DELETE")
+}
+
+export async function getAllUsers() {
+    const response = await api("users/", 'GET');
     return response;
 }

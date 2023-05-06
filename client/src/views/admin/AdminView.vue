@@ -1,6 +1,25 @@
 <script setup lang="ts">
-  import database from '../../../data/database.json'
+  import { ref } from 'vue';
+  import { getAllUsers, deleteUser, type User } from '../../model/session';
   import ThreeColumnLayout from '../../components/ThreeColumnLayout.vue';
+
+  const defaultPhoto = "https://i.pinimg.com/1200x/47/77/ae/4777ae0906dd0113ad0bb00d61125d1b.jpg";
+  const users = ref<User[]>([]);
+  const fetchUsers = () => {
+      getAllUsers().then((data) => {
+          users.value = data.data.reverse();
+      })
+      setTimeout(fetchUsers, 500);
+  }
+  fetchUsers();
+  
+  const deleteItem = (id: string) => {
+    console.log("delete Item with id: ", id);
+    deleteUser(id).then((data) => {
+        console.log(data);
+    });
+  }
+  
 </script>
 
 <template>
@@ -26,20 +45,17 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(user, index) in database.users" :key="index">
+              <tr v-for="(user, index) in users.sort((a, b) => (a.role === 'admin' && b.role !== 'admin') ? -1 : 0)" :key="index">
                 <td>
-                  <img :src="user.photo" class="table-photo">
+                  <img :src="user.photo ? user.photo : defaultPhoto" class="table-photo">
                 </td>
                 <td>{{ user.name }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.id }}</td>
+                <td>{{ user.role }}</td>
                 <td>
                   <div class="field is-grouped">
                     <button class="button">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <button class="button">
-                      <i class="fas fa-trash"></i>
+                      <i class="fas fa-trash" @click="deleteItem(user._id)"></i>
                     </button>
                   </div>
                 </td>
@@ -47,7 +63,7 @@
             </tbody>
           </table>
         </div>
-        <span class="has-text-primary">*A higher number indicates more privileges. Adminstrators have a number of 5.</span>
+        <span class="has-text-primary">*Admins are shown on top</span>
       </div>
     </template>
   </ThreeColumnLayout>
