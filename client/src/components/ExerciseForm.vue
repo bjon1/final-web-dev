@@ -3,6 +3,7 @@
     import { ref } from 'vue';
     import { useSession } from '@/model/session';
     import { addExercise, type Exercise } from '../model/exercises';
+    import Autocomplete from './Autocomplete.vue';
 
     const props = defineProps<{
         isOpen: boolean
@@ -14,8 +15,9 @@
 
     const session = useSession();
     const exercise = ref<Exercise>({} as Exercise);
+    const tag = ref('' as string);
 
-    const addWorkout = () => { //make this function exportable
+    const addWorkout = () => {
         exercise.value.name = session.user?.name;
         addExercise(exercise.value)
             .then(data => {
@@ -38,6 +40,10 @@
     <Modal :title="'Add a Workout'" :is-open="props.isOpen" @update="() => emit('update')">
         <template #default>
             <div class="form">
+
+                <div class="column">
+                    <Autocomplete/>
+                </div>
 
                 <div class="column">
                     <label class="label">Select a Category:</label>

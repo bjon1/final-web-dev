@@ -74,3 +74,9 @@ export async function getAllUsers() {
     const response = await api("users/", 'GET');
     return response;
 }
+
+//returns whatever entries have searchTerm in its 
+export async function searchUsers(searchTerm: string) {
+    const response = await api(`users/search/${searchTerm}`, 'GET')
+    return response;
+}

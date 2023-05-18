@@ -16,7 +16,7 @@ router
             }).catch(next);
     })
 
-    .get('/search/:q', requireLogin(true), (req, res, next) => { //search
+    .get('/search/:q', requireLogin(), (req, res, next) => { //search
         model.search(req.params.q, +req.query.page, +req.query.pageSize)
             .then(list => {
                 const data = {

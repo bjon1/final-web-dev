@@ -57,9 +57,7 @@ const search = async (searchTerm, page = 1, pageSize = 30) => {
     const coll = await collection();
     const query = {
         $or: [
-            { title: { $regex: searchTerm, $options: 'i' } },
-            { description: { $regex: searchTerm, $options: 'i' } },
-            { brand: { $regex: searchTerm, $options: 'i' } }
+            { name: { $regex: searchTerm, $options: 'i' } }
         ]
     };
     const items = await coll.find(query).skip((page - 1) * pageSize).limit(pageSize).toArray();
