@@ -30,12 +30,12 @@
 
 <template>
     <ThreeColumnLayout>
-        <template #right-column>
+        <template #right-column-left>
             <div class="product-list">
                 <div class="product box" v-for="product in products" :key="product.id">
                     <a @click="toggleModal(product.title, product.price, product.description, product.thumbnail)">
                         <img :src="product.thumbnail" alt="product-image" style="border-radius: 15px;" />
-                        <h1 class = 'title is-4 '>{{ product.title }}</h1>
+                        <h1 class = 'title is-5 '>{{ product.title }}</h1>
                         <p class = 'subtitle is-6'>{{ product.description }}</p>
                     </a>
                     <div class="modal" :class="{'is-active': isModalActive}"> 

@@ -34,8 +34,9 @@
                 isInvalidForm.value = true;  
                 return;
             });
-
-        signIn(true); //update the UI
+        if(response) {
+            signIn(true); //update the UI
+        }
     }
 
     const signup = async (nameRef: string, emailRef: string, passwordRef: string) => {

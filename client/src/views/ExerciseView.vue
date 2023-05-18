@@ -5,6 +5,8 @@
     import { getExercises, deleteExercise, type Exercise } from '@/model/exercises';
     import { ref, computed } from 'vue';
     import userDatabase from '../../data/database.json'
+    import PersonalBoard from '../components/PersonalBoard.vue';
+    import ScoreBoard from '../components/ScoreBoard.vue'
 
     const route = useRoute();
     const name = computed(() => route.params.name);
@@ -46,7 +48,7 @@
     <ThreeColumnLayout>
         <template #right-column-left>
             <h1 class="title" v-show="!name">Your Exercise Activity</h1>
-            <div v-for="(exercise, index) in (name === 'feed' ? exercises : exercises.filter((elem) => elem.name == session.user?.name))" :key="index" class="box">
+            <div v-for="(exercise, index) in (name === 'feed' ? exercises : exercises.filter((elem) => elem.name == session.user?.name))" :key="index" class="post">
                 <article class="media">
                     <figure class="media-left">
                         <p class="image is-64x64">
@@ -88,9 +90,23 @@
                 </article>
             </div>
         </template>
+        <template #right-column-right>
+            <div v-if="name === 'feed'">
+                <ScoreBoard/>
+            </div>
+            <div v-else>
+                <PersonalBoard/>
+            </div>
+        </template>
     </ThreeColumnLayout>
 </template>
 
 <style scoped>
+
+.post {
+    padding-top: 2em;
+    padding-bottom: 2em;
+    border-bottom: 1px solid #dbdbdb;
+}
 
 </style>
