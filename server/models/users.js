@@ -87,9 +87,9 @@ const generateTokenAsync = (user, secret, expiresIn) => {
     return new Promise( (resolve, reject) => {
         jwt.sign(user, secret, { expiresIn }, (err, token) => {
             if (err) {
-                reject(err);
+                reject(err); //triggers .catch
             } else {
-                resolve(token);
+                resolve(token); //triggers .then
             }
         });
     });
