@@ -1,8 +1,8 @@
 # final-web-dev
-The final project and assignments for a web dev class taken at University
+The final project for a web dev class taken at University. This project's name is eLogger, a comprehensive web app that allows the user to log their exercises and keep track of their habits.
 
 
-Test Username & Password info: 
+If you want to test this website, here are some username & password info you can use to enter the site:
 
 email: jonb1@newpaltz.edu
 password: pass1
