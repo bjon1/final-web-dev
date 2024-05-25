@@ -1,8 +1,10 @@
 # final-web-dev
-The final project for a web dev class taken at University. This project's name is eLogger, a comprehensive web app that allows the user to log their exercises and keep track of their habits.
+eLogger is a comprehensive website application created for a University class that allows the user to keep track of their habits, log their exercises, and share them with their friends.
 
+# Technologies Used:
+This website uses the MEVN stack (MongoDB, Express, Vue, Node) and handles user authentication & authorization.
 
-Log in as Admin
+# Example Username and Password to Log in
 email: wheed1@newpaltz.edu
 password: pass2
 
